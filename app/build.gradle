@@ -64,4 +64,7 @@ dependencies {
     //Implemencación de librería pdf
     //https://github.com/barteksc/AndroidPdfViewer
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+
+    // paquete de parse json
+    implementation 'com.google.code.gson:gson:2.10.1'
 }

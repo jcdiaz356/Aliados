@@ -17,6 +17,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dataservicios.aliados.repo.MonthRepo;
+import com.dataservicios.aliados.repo.UserRepo;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.JsonArray;
@@ -50,6 +52,8 @@ public class LoginActivity extends AppCompatActivity {
     private CheckBox chk_session;
     private DatabaseHelper helper;
     private int user_id;
+    private UserRepo userRepo;
+    private MonthRepo monthRepo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +63,8 @@ public class LoginActivity extends AppCompatActivity {
         DatabaseManager.init(activity);
         helper = DatabaseManager.getInstance().getHelper();
 
-
+        userRepo = new UserRepo(activity);
+        monthRepo = new MonthRepo(activity);
 
         dialog  = new Dialog(activity);
         btn_signup = (NoboButton)  findViewById(R.id.btn_signup);
@@ -119,14 +124,17 @@ public class LoginActivity extends AppCompatActivity {
 
                                     // ********* Eliminando todo los usuarios si existe *********************
                                     List<User> items = null;
-                                    items = helper.getUserDao().queryForAll();
+                                    //items = helper.getUserDao().queryForAll();
+                                    items = (List<User>) userRepo.findAll();
                                     Log.d(LOG_TAG, "Obteniedo Todos los clientes para limpiar");
                                     for (User object : items) {
-                                        helper.getUserDao().deleteById(object.getId());
+                                        //helper.getUserDao().deleteById(object.getId());
+                                        userRepo.delete(object);
                                         Log.d(LOG_TAG, "Eliminando User:" + object.toString());
                                     }
-                                    helper.getUserDao().create(newUser);
 
+                                    // helper.getUserDao().create(newUser);
+                                    userRepo.create(newUser);
                                     // **********************************
                                     // Creando el objeto mounth
                                     // *********************************
@@ -134,10 +142,12 @@ public class LoginActivity extends AppCompatActivity {
                                     JsonArray months = userJsonObject.getAsJsonArray("months");
                                     // ********* Eliminando todo los meses si existe *********************
                                     List<Month> itemsMonth = null;
-                                    itemsMonth = helper.getMonthDao().queryForAll();
+                                    //itemsMonth = helper.getMonthDao().queryForAll();
+
                                     Log.d(LOG_TAG, "Obteniedo Todos los clientes para limpiar");
                                     for (Month object : itemsMonth) {
-                                        helper.getMonthDao().deleteById(object.getId());
+                                        //helper.getMonthDao().deleteById(object.getId());
+                                        monthRepo.delete(object);
                                         Log.d(LOG_TAG, "Eliminando Mes:" + object.toString());
                                     }
 
@@ -149,7 +159,8 @@ public class LoginActivity extends AppCompatActivity {
                                         newMont.setMonth_number(month.get("month_number").getAsString());
                                         newMont.setMount(month.get("month").getAsString());
                                         newMont.setYear_number(month.get("year_number").getAsInt());
-                                        helper.getMonthDao().create(newMont);
+                                       //  helper.getMonthDao().create(newMont);
+                                        monthRepo.create(newMont);
                                     }
 
                                     Intent intent = new Intent(activity, PanelAdminActivity.class);
@@ -193,14 +204,8 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d(LOG_TAG, "Error En red: " + t.getMessage());
                         Log.d(LOG_TAG, t.getMessage());
                         Toast.makeText(activity, "Server error, no se pudo obtener información", Toast.LENGTH_SHORT).show();
-
                     }
-
                 });
-
-
-
-
             }
         });
     }

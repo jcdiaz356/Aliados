@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.dataservicios.aliados.db.DatabaseHelper;
 import com.dataservicios.aliados.db.DatabaseManager;
 import com.dataservicios.aliados.model.User;
+import com.dataservicios.aliados.repo.UserRepo;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvVersion, tvLoad;
     private int i=0;
     private DatabaseHelper helper;
+    private UserRepo userRepo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaseManager.init(activity);
         helper = DatabaseManager.getInstance().getHelper();
+
+        userRepo = new UserRepo(activity);
 
         pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
         tvVersion = (TextView) findViewById(R.id.tvVersion);
@@ -69,12 +73,13 @@ public class MainActivity extends AppCompatActivity {
 
                 List<User> items = null;
                 User user = null;
-                try {
-                    items = helper.getUserDao().queryForAll();
-                } catch (SQLException e) {
-                    Toast.makeText(activity, "Error interno database", Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
-                }
+//                try {
+                   // items = helper.getUserDao().queryForAll();
+                    items = (List<User>) userRepo.findAll();
+//                } catch (SQLException e) {
+//                    Toast.makeText(activity, "Error interno database", Toast.LENGTH_SHORT).show();
+//                    e.printStackTrace();
+//                }
                 Log.d(LOG_TAG, "Obteniedo Todos los clientes para limpiar");
                 for (User object : items) {
                     user = (User) object;

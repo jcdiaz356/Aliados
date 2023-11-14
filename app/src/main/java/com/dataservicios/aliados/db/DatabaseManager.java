@@ -3,9 +3,7 @@ package com.dataservicios.aliados.db;
 import android.content.Context;
 
 public class DatabaseManager {
-
 	static private DatabaseManager instance;
-
 	static public void init(Context ctx) {
 		if (null==instance) {
 			instance = new DatabaseManager(ctx);
