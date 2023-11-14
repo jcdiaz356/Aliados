@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:background="#DADAE0"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/fondo_xxxhdpi"
+            android:gravity="center"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="340dp"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:src="@drawable/logo_ganamasxxxhdpi" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <com.ornach.richtext.RichView
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="8dp"
+                    app:rt_backgroundColor="@color/white"
+                    app:rt_radius="12dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/txt_input_usercode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:textSize="18dp"
+                        app:boxBackgroundMode="none"
+                        app:hintTextAppearance="@style/TextAppearance.AppCompat">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txt_usercode"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+
+                            android:hint="@string/text_username"
+                            android:inputType="text"
+                            android:padding="12dp"
+                            android:singleLine="false"
+                            android:textStyle="bold"
+                            android:textSize="18dp"
+                            android:text=""
+                            android:textAlignment="center" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </com.ornach.richtext.RichView>
+
+                <com.ornach.richtext.RichView
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp"
+                    android:padding="8dp"
+                    app:rt_backgroundColor="@color/white"
+                    app:rt_radius="12dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/txt_input_passsword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textStyle="bold"
+                        android:textSize="18dp"
+                        app:boxBackgroundMode="none"
+                        app:hintTextAppearance="@style/TextAppearance.AppCompat">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txt_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="@string/text_password"
+                            android:inputType="textPassword"
+                            android:padding="12dp"
+                            android:singleLine="false"
+                            android:textStyle="bold"
+                            android:textSize="18dp"
+                            android:text=""
+                            android:textAlignment="center" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </com.ornach.richtext.RichView>
+
+                <com.ornach.nobobutton.NoboButton
+                    android:id="@+id/btn_signup"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:padding="18dp"
+                    app:nb_backgroundColor="@color/yelow_500"
+                    app:nb_radius="12dp"
+                    app:nb_text="@string/text_login"
+                    app:nb_textColor="@android:color/white"
+                    app:nb_textSize="24sp"
+                    app:nb_textStyle="bold" />
+
+                <CheckBox
+                    android:id="@+id/chk_session"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RECORDAR INICIO DE SESIÓN"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textSize="9dp"
+                    android:gravity="center"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/layout_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/loginText">
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

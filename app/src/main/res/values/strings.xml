@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Ganamas</string>
+    <string name="text_username">CÓDIGO DE TERRITORIO</string>
+    <string name="text_login">INICIAR SESIÓN</string>
+    <string name="home">Inicio</string>
+    <string name="status_accout">Estado de cuenta</string>
+    <string name="concourse">Concursos</string>
+    <string name="promotions">Promociones</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment welcome</string>
+    <string name="text_welcome">BIENVENIDO</string>
+    <string name="Salir">Salir</string>
+    <string name="text_password">CONTRASEÑA</string>
+    <string name="text_re_password">CONFIRMAR CONTRASEÑA</string>
+    <string name="text_password_new">CONTRASEÑA NUEVA</string>
+    <string name="text_changa_password">CAMBIAR CONTRASEÑA</string>
+    <string name="text_changa_password_menu">Cambiar contraseña</string>
+</resources>

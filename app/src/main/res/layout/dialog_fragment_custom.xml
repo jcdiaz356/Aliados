@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    >
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/dialog_curve_shap"
+        android:orientation="vertical"
+        android:id="@+id/container">
+
+
+        <com.ornach.magicicon.IconButton
+            android:id="@+id/action_close"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="top|end"
+            android:padding="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_close_white_24dp"
+            app:mi_iconColor="@color/white" />
+
+    <LinearLayout
+        android:id="@+id/ly_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        >
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ly_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textSize="12dp"
+                android:text="No se encuentran novedades" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ly_contendor_btn_promotions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:paddingLeft="28dp"
+            android:paddingRight="28dp"
+            android:gravity="center|center_horizontal"
+            android:orientation="vertical"
+            android:minWidth="300dp"
+            android:minHeight="300dp">
+<!--            <com.ornach.nobobutton.ViewButton-->
+<!--                android:layout_width="200dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="20dp"-->
+<!--                android:gravity="center"-->
+<!--                app:nb_radius="0dp"-->
+<!--                app:nb_backgroundColor="@color/orange_500">-->
+<!--                <com.ornach.magicicon.IconView-->
+<!--                    android:layout_width="48dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:padding="7dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:src="@drawable/ic_download"-->
+<!--                    app:mi_backgroundColor="@color/orange_200"-->
+<!--                    app:mi_iconColor="@color/white"-->
+<!--                    app:mi_radius="0dp"-->
+<!--                    />-->
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="start"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:text="AAAAAAAAAAA"-->
+<!--                    android:textAllCaps="true"-->
+<!--                    android:textColor="@android:color/white"-->
+<!--                    android:textSize="16sp" />-->
+
+
+<!--            </com.ornach.nobobutton.ViewButton>-->
+<!--            <com.ornach.nobobutton.ViewButton-->
+<!--                android:layout_width="200dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="20dp"-->
+<!--                android:gravity="center"-->
+<!--                app:nb_radius="0dp"-->
+<!--                app:nb_backgroundColor="@color/orange_500">-->
+<!--                <com.ornach.magicicon.IconView-->
+<!--                    android:layout_width="48dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:padding="7dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:src="@drawable/ic_download"-->
+<!--                    app:mi_backgroundColor="@color/orange_200"-->
+<!--                    app:mi_iconColor="@color/white"-->
+<!--                    app:mi_radius="0dp"-->
+<!--                    />-->
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="start"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:text="AAAAAAAAAAA"-->
+<!--                    android:textAllCaps="true"-->
+<!--                    android:textColor="@android:color/white"-->
+<!--                    android:textSize="16sp" />-->
+
+
+<!--            </com.ornach.nobobutton.ViewButton>-->
+<!--            <com.ornach.nobobutton.ViewButton-->
+<!--                android:layout_width="200dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="20dp"-->
+<!--                android:gravity="center"-->
+<!--                app:nb_radius="0dp"-->
+<!--                app:nb_backgroundColor="@color/orange_500">-->
+<!--                <com.ornach.magicicon.IconView-->
+<!--                    android:layout_width="48dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:padding="7dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:src="@drawable/ic_download"-->
+<!--                    app:mi_backgroundColor="@color/orange_200"-->
+<!--                    app:mi_iconColor="@color/white"-->
+<!--                    app:mi_radius="0dp"-->
+<!--                    />-->
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="start"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:text="AAAAAAAAAAA"-->
+<!--                    android:textAllCaps="true"-->
+<!--                    android:textColor="@android:color/white"-->
+<!--                    android:textSize="16sp" />-->
+
+
+<!--            </com.ornach.nobobutton.ViewButton>-->
+<!--            <com.ornach.nobobutton.ViewButton-->
+<!--                android:layout_width="200dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginBottom="20dp"-->
+<!--                android:gravity="center"-->
+<!--                app:nb_radius="0dp"-->
+<!--                app:nb_backgroundColor="@color/orange_500">-->
+<!--                <com.ornach.magicicon.IconView-->
+<!--                    android:layout_width="48dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:padding="7dp"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:src="@drawable/ic_download"-->
+<!--                    app:mi_backgroundColor="@color/orange_200"-->
+<!--                    app:mi_iconColor="@color/white"-->
+<!--                    app:mi_radius="0dp"-->
+<!--                    />-->
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="start"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:text="AAAAAAAAAAA"-->
+<!--                    android:textAllCaps="true"-->
+<!--                    android:textColor="@android:color/white"-->
+<!--                    android:textSize="16sp" />-->
+
+
+<!--            </com.ornach.nobobutton.ViewButton>-->
+
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
