@@ -58,7 +58,7 @@ public class WelcomeFragment extends Fragment {
 
     private Activity activity;
     private Spinner spn_program;
-    private TextView tv_user_name,tv_dex,tv_fuerza_venta,tv_llave_general,tv_foods,tv_home_care,tv_porc_gestion,tv_updated_at;
+    private TextView tv_user_name,tv_dex,tv_fuerza_venta,tv_llave_general,tv_foods,tv_home_care,tv_porc_gestion,tv_updated_at,tv_llave;
     private ImageView iv_porc_gestion;
     private Dialog dialog;
     private Client client;
@@ -98,6 +98,8 @@ public class WelcomeFragment extends Fragment {
         tv_porc_gestion = (TextView) rootView.findViewById(R.id.tv_porc_gestion);
         tv_updated_at = (TextView) rootView.findViewById(R.id.tv_updated_at);
         iv_porc_gestion = (ImageView) rootView.findViewById(R.id.iv_porc_gestion);
+
+        tv_llave = (TextView) rootView.findViewById(R.id.tv_llave);
 
         tv_user_name.setText(client.getFullname());
 //        tv_dex.setText(user.getDex());
@@ -170,10 +172,13 @@ public class WelcomeFragment extends Fragment {
         String planSi = numberFormat.format(award.getPlan_total());
 
         tv_llave_general.setText("S/."+planSi);
+        String llave_value = ( award.getKeyv_total() == 1) ? "SI" : "NO" ;
+        tv_llave.setText(llave_value);
         String realSi = numberFormat.format(award.getReal_total());
         tv_foods.setText("S/."+realSi);
         String faltante = numberFormat.format(award.getPlan_total()-award.getReal_total());
         tv_home_care.setText("S/."+faltante);
+        tv_porc_gestion.setText(String.valueOf(award.getAvance_total()) );
 
         // Crea un objeto SimpleDateFormat para el formato deseado
         SimpleDateFormat formatoOriginal = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -195,6 +200,7 @@ public class WelcomeFragment extends Fragment {
             e.printStackTrace();
             // Puedes mostrar un mensaje de error o realizar alguna otra acción adecuada
         }
+
 
         /*float value_key_personal = Float.valueOf(award.getAvance_total());*/
         float value_key_personal = award.getAvance_total().floatValue();

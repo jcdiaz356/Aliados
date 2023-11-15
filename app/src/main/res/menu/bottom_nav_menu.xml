@@ -4,19 +4,19 @@
         android:id="@+id/page_home"
         android:icon="@drawable/inicioxxxhdpi"
         android:title="@string/home" />
-
+    <item
+        android:id="@+id/page_concourse"
+        android:icon="@drawable/concoursxxxhdpi"
+        android:title="@string/concourse" />
     <item
         android:id="@+id/page_status_account"
         android:icon="@drawable/status_accountxxxhdpi"
         android:title="@string/status_accout" />
 
-    <item
-        android:id="@+id/page_concourse"
-        android:icon="@drawable/concoursxxxhdpi"
-        android:title="@string/concourse" />
 
-    <item
-        android:id="@+id/page_promotions"
-        android:icon="@drawable/promo_xxxhdpi"
-        android:title="@string/promotions" />
+
+<!--    <item-->
+<!--        android:id="@+id/page_promotions"-->
+<!--        android:icon="@drawable/promo_xxxhdpi"-->
+<!--        android:title="@string/promotions" />-->
 </menu>
