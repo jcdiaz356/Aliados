@@ -4,9 +4,7 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.Gravity;
@@ -15,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -29,14 +26,13 @@ import com.dataservicios.aliados.R;
 import com.dataservicios.aliados.db.DatabaseHelper;
 import com.dataservicios.aliados.db.DatabaseManager;
 import com.dataservicios.aliados.model.Month;
-import com.dataservicios.aliados.model.User;
+import com.dataservicios.aliados.model.Client;
 import com.dataservicios.aliados.servicesApi.RestApiAdapter;
 import com.dataservicios.aliados.servicesApi.Service;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,9 +52,9 @@ public class StatusAccountFragment extends Fragment {
 
 
     private Month month;
-    private User user;
+    private Client user;
 
-    public StatusAccountFragment(User user) {
+    public StatusAccountFragment(Client user) {
         this.user = user;
     }
 
@@ -138,7 +134,7 @@ public class StatusAccountFragment extends Fragment {
 
 
         Map<String, String> map = new HashMap<String, String>();
-        map.put("id", user.getId_data());
+        /*map.put("id", user.getId_data());*/
         map.put("month", month.getMonth_number());
         map.put("year", String.valueOf(month.getYear_number()));
 

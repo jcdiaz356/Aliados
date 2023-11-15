@@ -2,7 +2,6 @@ package com.dataservicios.aliados.fragments;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -16,37 +15,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.dataservicios.aliados.LoginActivity;
-import com.dataservicios.aliados.PanelAdminActivity;
 import com.dataservicios.aliados.R;
 import com.dataservicios.aliados.db.DatabaseHelper;
 import com.dataservicios.aliados.db.DatabaseManager;
 import com.dataservicios.aliados.model.Month;
-import com.dataservicios.aliados.model.User;
+import com.dataservicios.aliados.model.Client;
 import com.dataservicios.aliados.servicesApi.RestApiAdapter;
 import com.dataservicios.aliados.servicesApi.Service;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -67,9 +56,9 @@ public class WelcomeFragment extends Fragment {
     private DatabaseHelper helper;
 
     private Month month;
-    private User user;
+    private Client user;
 
-    public WelcomeFragment(User user) {
+    public WelcomeFragment(Client user) {
         // Required empty public constructor
         this.user = user;
         this.activity = getActivity();
@@ -98,9 +87,9 @@ public class WelcomeFragment extends Fragment {
         tv_updated_at = (TextView) rootView.findViewById(R.id.tv_updated_at);
         iv_porc_gestion = (ImageView) rootView.findViewById(R.id.iv_porc_gestion);
 
-        tv_user_name.setText(user.getName());
+        /*tv_user_name.setText(user.getName());
         tv_dex.setText(user.getDex());
-        tv_fuerza_venta.setText(user.getFfvv());
+        tv_fuerza_venta.setText(user.getFfvv());*/
 
 
 
@@ -161,7 +150,7 @@ public class WelcomeFragment extends Fragment {
 
 
         Map<String, String> map = new HashMap<String, String>();
-        map.put("id", user.getId_data());
+        /*map.put("id", user.getId_data());*/
         map.put("month", month.getMonth_number());
         map.put("year", String.valueOf(month.getYear_number()));
 

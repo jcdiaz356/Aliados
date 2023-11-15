@@ -1,26 +1,17 @@
 package com.dataservicios.aliados.util;
 
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
-import com.dataservicios.aliados.LoginActivity;
-import com.dataservicios.aliados.PanelAdminActivity;
-import com.dataservicios.aliados.model.User;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.SQLException;
-import java.util.List;
 
 public class RecibirPDFStream extends AsyncTask<String,Void, InputStream> {
 

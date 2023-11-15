@@ -4,18 +4,15 @@ import android.content.Context;
 
 import com.dataservicios.aliados.db.DatabaseHelper;
 import com.dataservicios.aliados.db.DatabaseManager;
-import com.dataservicios.aliados.model.User;
+import com.dataservicios.aliados.model.Award;
 
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Created by jcdia on 21/03/2017.
- */
-public class UserRepo implements Crud {
+public class AwardRepo implements Crud {
     private DatabaseHelper helper;
 
-    public UserRepo(Context context) {
+    public AwardRepo(Context context) {
 
         DatabaseManager.init(context);
         helper = DatabaseManager.getInstance().getHelper();
@@ -24,9 +21,9 @@ public class UserRepo implements Crud {
     @Override
     public int create(Object item) {
         int index = -1;
-        User object = (User) item;
+        Award object = (Award) item;
         try {
-            index = helper.getUserDao().create(object);
+            index = helper.getAwardDao().create(object);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -39,10 +36,10 @@ public class UserRepo implements Crud {
 
         int index = -1;
 
-        User object = (User) item;
+        Award object = (Award) item;
 
         try {
-            helper.getUserDao().update(object);
+            helper.getAwardDao().update(object);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -56,10 +53,10 @@ public class UserRepo implements Crud {
 
         int index = -1;
 
-        User object = (User) item;
+        Award object = (Award) item;
 
         try {
-            helper.getUserDao().delete(object);
+            helper.getAwardDao().delete(object);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,14 +68,14 @@ public class UserRepo implements Crud {
     @Override
     public int deleteAll() {
 
-        List<User> items = null;
+        List<Award> items = null;
         int counter = 0;
         try {
-            items = helper.getUserDao().queryForAll();
+            items = helper.getAwardDao().queryForAll();
 
-            for (User object : items) {
+            for (Award object : items) {
                 // do something with object
-                helper.getUserDao().deleteById(object.getId());
+                helper.getAwardDao().deleteById(object.getId());
                 counter ++ ;
             }
 
@@ -92,9 +89,9 @@ public class UserRepo implements Crud {
     @Override
     public Object findById(int id) {
 
-        User wishList = null;
+        Award wishList = null;
         try {
-            wishList = helper.getUserDao().queryForId(id);
+            wishList = helper.getAwardDao().queryForId(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -105,10 +102,10 @@ public class UserRepo implements Crud {
     @Override
     public List<?> findAll() {
 
-        List<User> items = null;
+        List<Award> items = null;
 
         try {
-            items = helper.getUserDao().queryForAll();
+            items = helper.getAwardDao().queryForAll();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -122,7 +119,7 @@ public class UserRepo implements Crud {
 
         Object wishList = null;
         try {
-            wishList = helper.getUserDao().queryBuilder().queryForFirst();
+            wishList = helper.getAwardDao().queryBuilder().queryForFirst();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -133,11 +130,10 @@ public class UserRepo implements Crud {
     public long countReg() {
         long count = 0;
         try {
-            count = helper.getUserDao().countOf();
+            count = helper.getAwardDao().countOf();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return count;
     }
-
 }

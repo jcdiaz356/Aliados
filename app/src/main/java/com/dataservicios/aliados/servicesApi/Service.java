@@ -19,9 +19,9 @@ import retrofit2.http.Path;
 
 public interface Service {
 
-    @POST("getUserForCode")
+    @POST("getClientForCodeAndPassword")
 //    Call<JsonObject> getUserForCode(@Body String code);
-    Call<JsonObject> getUserForCode(@Body Map<String, String> map);
+    Call<JsonObject> getClientForCodeAndPassword(@Body Map<String, String> map);
 
     @POST("getUserLoginForCode")
 //    Call<JsonObject> getUserForCode(@Body String code);

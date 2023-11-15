@@ -25,7 +25,7 @@ import com.dataservicios.aliados.db.DatabaseHelper;
 import com.dataservicios.aliados.db.DatabaseManager;
 import com.dataservicios.aliados.model.Concourse;
 import com.dataservicios.aliados.model.Month;
-import com.dataservicios.aliados.model.User;
+import com.dataservicios.aliados.model.Client;
 import com.dataservicios.aliados.servicesApi.RestApiAdapter;
 import com.dataservicios.aliados.servicesApi.Service;
 
@@ -47,7 +47,7 @@ public class ConcourseDetailFragment extends Fragment {
     private TextView tv_fecha_inicio,tv_fecha_fin,tv_description,tv_sku,tv_umc ;
     private TextView tv_concurso,tv_fuerza_venta,tv_tipo ;
 
-    private User user;
+    private Client user;
     private Month month;
     private String concurse_id;
     private int concourse_detail_id;
@@ -56,7 +56,7 @@ public class ConcourseDetailFragment extends Fragment {
 
     private DatabaseHelper helper;
 
-    public ConcourseDetailFragment(User user, Month month, String concurse_id,int concourse_detail_id) {
+    public ConcourseDetailFragment(Client user, Month month, String concurse_id, int concourse_detail_id) {
         // Required empty public constructor
         this.user = user;
         this.month = month;
@@ -87,7 +87,7 @@ public class ConcourseDetailFragment extends Fragment {
         tv_umc = (TextView)  rootView.findViewById(R.id.tv_umc);
 
 
-        tv_fuerza_venta.setText(user.getFfvv().toString());
+        /*tv_fuerza_venta.setText(user.getFfvv().toString());*/
 
 
         getDataConcourse();
@@ -117,7 +117,7 @@ public class ConcourseDetailFragment extends Fragment {
         Concourse concourse = new Concourse();
 
         Map<String, String> map = new HashMap<String, String>();
-        map.put("id", user.getId_data());
+        /*map.put("id", user.getId_data());*/
         map.put("month", month.getMonth_number());
 //         map.put("concourse_id", concurse_id);
        map.put("concourse_detail_id", String.valueOf(concourse_detail_id));

@@ -23,7 +23,7 @@ import com.dataservicios.aliados.fragments.ConcourseFragment;
 import com.dataservicios.aliados.fragments.PromotionsFragment;
 import com.dataservicios.aliados.fragments.StatusAccountFragment;
 import com.dataservicios.aliados.fragments.WelcomeFragment;
-import com.dataservicios.aliados.model.User;
+import com.dataservicios.aliados.model.Client;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -35,7 +35,7 @@ public class PanelAdminActivity extends AppCompatActivity {
     private BottomNavigationView nav_view;
     private Fragment fragment;
     private Toolbar toolbar;
-    private User user;
+    private Client user;
     private DatabaseHelper helper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class PanelAdminActivity extends AppCompatActivity {
         helper = DatabaseManager.getInstance().getHelper();
 
         try {
-            user =  helper.getUserDao().queryForId(user_id);
+            user =  helper.getClientDao().queryForId(user_id);
         } catch (SQLException e) {
             e.printStackTrace();
             Toast.makeText(activity, "No se pudo encontrar el usuario", Toast.LENGTH_LONG).show();
@@ -126,16 +126,16 @@ public class PanelAdminActivity extends AppCompatActivity {
 
             case R.id.navigation_close:
 
-                List<User> items = null;
+                List<Client> items = null;
                 try {
-                    items = helper.getUserDao().queryForAll();
+                    items = helper.getClientDao().queryForAll();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
                 Log.d(LOG_TAG, "Obteniedo Todos los clientes para limpiar");
-                for (User object : items) {
+                for (Client object : items) {
                     try {
-                        helper.getUserDao().deleteById(object.getId());
+                        helper.getClientDao().deleteById(object.getId());
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }

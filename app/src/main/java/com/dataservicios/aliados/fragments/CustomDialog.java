@@ -1,15 +1,11 @@
 package com.dataservicios.aliados.fragments;
 
-import static android.content.Context.DOWNLOAD_SERVICE;
-
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.DownloadManager;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 
 import android.view.LayoutInflater;
@@ -23,18 +19,15 @@ import android.widget.Toast;
 import com.ornach.magicicon.IconButton;
 
 import com.ornach.nobobutton.ViewButton;
-import com.dataservicios.aliados.PanelAdminActivity;
 import com.dataservicios.aliados.PreviewActivity;
 import com.dataservicios.aliados.R;
 import com.dataservicios.aliados.model.Promotion;
 import com.dataservicios.aliados.model.PromotionDetail;
-import com.dataservicios.aliados.model.User;
+import com.dataservicios.aliados.model.Client;
 import com.dataservicios.aliados.servicesApi.RestApiAdapter;
 import com.dataservicios.aliados.servicesApi.Service;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,7 +42,7 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
    private Dialog d;
 
    private IconButton action_close;
-   private User user;
+   private Client user;
 
 
    private LinearLayout ly_contendor_btn_promotions,ly_loading,ly_message;
@@ -61,7 +54,7 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
 
 
 
-   public CustomDialog(Activity activity,int promotion_id,User user) {
+   public CustomDialog(Activity activity, int promotion_id, Client user) {
       super(activity);
       this.activity = activity;
       this.promotion_id = promotion_id;
@@ -85,7 +78,7 @@ public class CustomDialog extends Dialog implements android.view.View.OnClickLis
       Map<String, String> map = new HashMap<String, String>();
 
       map.put("promotion_id", String.valueOf(this.promotion_id));
-      map.put("zone_id", String.valueOf(user.getZone_id()));
+      /*map.put("zone_id", String.valueOf(user.getZone_id()));*/
 
 
 

@@ -7,8 +7,10 @@ import android.text.TextUtils;
 import android.util.Log;
 
 
+import com.dataservicios.aliados.model.Award;
 import com.dataservicios.aliados.model.Month;
-import com.dataservicios.aliados.model.User;
+import com.dataservicios.aliados.model.Client;
+import com.dataservicios.aliados.model.Program;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
@@ -25,14 +27,16 @@ import java.util.List;
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private static final String LOG_TAG = DatabaseHelper.class.getSimpleName();
 	// name of the database file for your application -- change to something appropriate for your app
-	private static final String DATABASE_NAME = "db_ganamas";
+	private static final String DATABASE_NAME = "db_aliados";
 	// any time you make changes to your database objects, you may have to increase the database version
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 1;
     private Context myContext;
 	// the DAO object we use to access the SimpleData table
     //pressure
 
-	private Dao<User, Integer> UserDao                      = null;
+	private Dao<Client, Integer> ClientDao                      = null;
+    private Dao<Program, Integer> ProgramDao                      = null;
+    private Dao<Award, Integer> AwardDao                      = null;
 	private Dao<Month, Integer> MonthDao                      = null;
 
 	public DatabaseHelper(Context context) {
@@ -45,7 +49,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 		try {
 			
 
-			TableUtils.createTable(connectionSource, User.class                     );
+			TableUtils.createTable(connectionSource, Client.class                     );
+            TableUtils.createTable(connectionSource, Program.class                     );
+            TableUtils.createTable(connectionSource, Award.class                     );
+
 			TableUtils.createTable(connectionSource, Month.class                     );
 
             Log.i(LOG_TAG, "execute method onCreate: Can't create Tables");
@@ -77,7 +84,10 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			}
 
 
-            TableUtils.dropTable(connectionSource, User.class,true              );
+            TableUtils.dropTable(connectionSource, Client.class,true              );
+            TableUtils.createTable(connectionSource, Program.class                     );
+            TableUtils.createTable(connectionSource, Award.class                     );
+
             TableUtils.dropTable(connectionSource, Month.class,true              );
 
             onCreate(db,connectionSource);
@@ -95,15 +105,37 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 
 
-    public Dao<User, Integer> getUserDao() {
-        if (null == UserDao) {
+    public Dao<Client, Integer> getClientDao() {
+        if (null == ClientDao) {
             try {
-                UserDao = getDao(User.class);
+                ClientDao = getDao(Client.class);
             }catch (java.sql.SQLException e) {
                 e.printStackTrace();
             }
         }
-        return UserDao;
+        return ClientDao;
+    }
+
+    public Dao<Program, Integer> getProgramDao() {
+        if (null == ProgramDao) {
+            try {
+                ProgramDao = getDao(Program.class);
+            }catch (java.sql.SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return ProgramDao;
+    }
+
+    public Dao<Award, Integer> getAwardDao() {
+        if (null == AwardDao) {
+            try {
+                AwardDao = getDao(Award.class);
+            }catch (java.sql.SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return AwardDao;
     }
 
     public Dao<Month, Integer> getMonthDao() {

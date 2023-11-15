@@ -1,9 +1,6 @@
 package com.dataservicios.aliados.fragments;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -16,24 +13,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.google.gson.JsonObject;
 import com.ornach.nobobutton.NoboButton;
 import com.dataservicios.aliados.R;
 import com.dataservicios.aliados.model.Promotion;
-import com.dataservicios.aliados.model.User;
+import com.dataservicios.aliados.model.Client;
 import com.dataservicios.aliados.servicesApi.RestApiAdapter;
 import com.dataservicios.aliados.servicesApi.Service;
 
-import java.io.Console;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -50,9 +42,9 @@ public class PromotionsFragment extends Fragment {
     private Dialog dialog;
     private ArrayList<Promotion> promotions = null ;
     private LinearLayout ly_contendor;
-    private User  user;
+    private Client user;
 
-    public PromotionsFragment(User user) {
+    public PromotionsFragment(Client user) {
         // Required empty public constructor
         this.user = user;
     }

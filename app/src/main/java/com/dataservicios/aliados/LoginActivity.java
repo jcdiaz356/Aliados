@@ -17,18 +17,22 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dataservicios.aliados.model.Award;
+import com.dataservicios.aliados.model.Program;
+import com.dataservicios.aliados.repo.AwardRepo;
 import com.dataservicios.aliados.repo.MonthRepo;
-import com.dataservicios.aliados.repo.UserRepo;
+import com.dataservicios.aliados.repo.ClientRepo;
+import com.dataservicios.aliados.repo.ProgramRepo;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.ornach.nobobutton.NoboButton;
 import com.dataservicios.aliados.db.DatabaseHelper;
 import com.dataservicios.aliados.db.DatabaseManager;
 import com.dataservicios.aliados.model.Month;
-import com.dataservicios.aliados.model.User;
+import com.dataservicios.aliados.model.Client;
 import com.dataservicios.aliados.servicesApi.RestApiAdapter;
 import com.dataservicios.aliados.servicesApi.Service;
 
@@ -51,9 +55,14 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout txt_input_usercode,txt_input_passsword;
     private CheckBox chk_session;
     private DatabaseHelper helper;
-    private int user_id;
-    private UserRepo userRepo;
+    private int client_id;
+    private ClientRepo clientRepo;
     private MonthRepo monthRepo;
+
+    private ProgramRepo programRepo;
+
+    private AwardRepo awardRepo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +72,11 @@ public class LoginActivity extends AppCompatActivity {
         DatabaseManager.init(activity);
         helper = DatabaseManager.getInstance().getHelper();
 
-        userRepo = new UserRepo(activity);
+        clientRepo = new ClientRepo(activity);
         monthRepo = new MonthRepo(activity);
+        programRepo = new ProgramRepo(activity);
+        awardRepo = new AwardRepo(activity);
+
 
         dialog  = new Dialog(activity);
         btn_signup = (NoboButton)  findViewById(R.id.btn_signup);
@@ -92,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 RestApiAdapter restApiAdapter = new RestApiAdapter();
                 Service service =  restApiAdapter.getClientService(activity);
-                Call<JsonObject> call =  service.getUserLoginForCode(map);
+                Call<JsonObject> call =  service.getClientForCodeAndPassword(map);
 
                 call.enqueue(new Callback<JsonObject>() {
                     @Override
@@ -100,46 +112,68 @@ public class LoginActivity extends AppCompatActivity {
 
                         try {
 
-                            JsonObject userJsonObject;
+                            JsonObject clientJsonObject;
                             if(response.isSuccessful()){
                                 Log.d(LOG_TAG,response.body().toString());
-                                userJsonObject = response.body();
-                                Boolean status = userJsonObject.get("success").getAsBoolean();
+                                clientJsonObject = response.body();
+                                Boolean status = clientJsonObject.get("success").getAsBoolean();
                                 if(status){
-                                    JsonObject user = userJsonObject.getAsJsonObject("user");
+                                    JsonObject client = clientJsonObject.getAsJsonObject("client");
                                     // **********************************
-                                    // Creando el objeto user
+                                    // Creando el objeto client
                                     // *********************************
-                                    User newUser = new User();
-                                    newUser.setId(user.get("code").getAsInt());
-                                    newUser.setId_data(user.get("id").getAsString());
-                                    newUser.setCode(user.get("code").getAsString());
-                                    newUser.setName(user.get("name").getAsString());
-                                    newUser.setFfvv(user.get("ffvv").getAsString());
-                                    newUser.setDex(user.get("dex").getAsString());
-                                    newUser.setDex_id(user.get("dex_id").getAsString());
-                                    newUser.setZone_id(user.get("zone_id").getAsInt());
+                                    Client newUser = new Gson().fromJson(client,Client.class);
+
                                     if(chk_session.isChecked()) newUser.setSave_ssesion(1); else  newUser.setSave_ssesion(0);
-                                    user_id = newUser.getId();
+                                    client_id = newUser.getId();
 
                                     // ********* Eliminando todo los usuarios si existe *********************
-                                    List<User> items = null;
+                                    List<Client> items = null;
                                     //items = helper.getUserDao().queryForAll();
-                                    items = (List<User>) userRepo.findAll();
+                                    items = (List<Client>) clientRepo.findAll();
                                     Log.d(LOG_TAG, "Obteniedo Todos los clientes para limpiar");
-                                    for (User object : items) {
+                                    for (Client object : items) {
                                         //helper.getUserDao().deleteById(object.getId());
-                                        userRepo.delete(object);
+                                        clientRepo.delete(object);
                                         Log.d(LOG_TAG, "Eliminando User:" + object.toString());
                                     }
 
                                     // helper.getUserDao().create(newUser);
-                                    userRepo.create(newUser);
+                                    clientRepo.create(newUser);
+
+                                    // **********************************
+                                    // Creando el array de objeto Programs
+                                    // *********************************
+
+                                    programRepo.deleteAll();
+                                    JsonArray programs = clientJsonObject.getAsJsonArray("programs");
+                                    // ********* Eliminando todo los programs si existe *********************
+                                    Program[] itemsPrograms = new Gson().fromJson(programs,Program[].class);
+
+
+                                    for (Program object : itemsPrograms){
+                                        programRepo.create(object);
+                                    }
+
+                                    List<Program> ObjectPrograms = (List<Program>) programRepo.findAll();
+
+                                    // **********************************
+                                    // Creando el objeto Amount
+                                    // *********************************
+
+                                    awardRepo.deleteAll();
+                                    JsonObject award = clientJsonObject.getAsJsonObject("award");
+                                    Award newAward = new Gson().fromJson(award, Award.class);
+
+
+                                    awardRepo.create(newAward);
+
+
                                     // **********************************
                                     // Creando el objeto mounth
                                     // *********************************
-                                   // JsonArray months = userJsonObject.getAsJsonArray("months");
-                                    JsonArray months = userJsonObject.getAsJsonArray("months");
+                                   // JsonArray months = clientJsonObject.getAsJsonArray("months");
+                                    JsonArray months = clientJsonObject.getAsJsonArray("months");
                                     // ********* Eliminando todo los meses si existe *********************
                                     List<Month> itemsMonth = null;
                                     //itemsMonth = helper.getMonthDao().queryForAll();
@@ -164,7 +198,7 @@ public class LoginActivity extends AppCompatActivity {
                                     }
 
                                     Intent intent = new Intent(activity, PanelAdminActivity.class);
-                                    intent.putExtra("user_id"              , user_id);
+                                    intent.putExtra("client_id"              , client_id);
                                     startActivity(intent);
                                     finish();
 

@@ -23,7 +23,7 @@ import com.dataservicios.aliados.db.DatabaseHelper;
 import com.dataservicios.aliados.db.DatabaseManager;
 import com.dataservicios.aliados.model.Concourse;
 import com.dataservicios.aliados.model.Month;
-import com.dataservicios.aliados.model.User;
+import com.dataservicios.aliados.model.Client;
 import com.dataservicios.aliados.servicesApi.RestApiAdapter;
 import com.dataservicios.aliados.servicesApi.Service;
 
@@ -43,7 +43,7 @@ public class ConcourseDetailsTwoFragment extends Fragment {
     private TextView tv_objetivo_cobertura,tv_avance_cobertura,tv_avance_cobertura_percent,tv_objetivo_volumen,tv_avance_volumen, tv_avance_volumen_percent,tv_puntos,tv_soles,tv_updated_at;
     private TextView tv_concurso,tv_fuerza_venta,tv_tipo ;
 
-    private User user;
+    private Client user;
     private Month month;
     private String concurse_id;
     private int concourse_detail_id;
@@ -52,7 +52,7 @@ public class ConcourseDetailsTwoFragment extends Fragment {
 
     private DatabaseHelper helper;
 
-    public ConcourseDetailsTwoFragment(User user, Month month, String concurse_id, int concourse_detail_id) {
+    public ConcourseDetailsTwoFragment(Client user, Month month, String concurse_id, int concourse_detail_id) {
         // Required empty public constructor
         this.user = user;
         this.month = month;
@@ -86,7 +86,7 @@ public class ConcourseDetailsTwoFragment extends Fragment {
         tv_soles=(TextView) rootView.findViewById(R.id.tv_soles);
         tv_updated_at = (TextView) rootView.findViewById(R.id.tv_updated_at);
 
-        tv_fuerza_venta.setText(user.getFfvv().toString());
+        /*tv_fuerza_venta.setText(user.getFfvv().toString());*/
 
         getDataConcourse();
 
@@ -103,7 +103,7 @@ public class ConcourseDetailsTwoFragment extends Fragment {
         Concourse concourse = new Concourse();
 
         Map<String, String> map = new HashMap<String, String>();
-        map.put("id", user.getId_data());
+        /*map.put("id", user.getId_data());*/
         map.put("month", month.getMonth_number());
 //        map.put("concourse_id", concurse_id);
         map.put("concourse_detail_id", String.valueOf(concourse_detail_id) );

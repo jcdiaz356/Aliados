@@ -29,14 +29,13 @@ import com.dataservicios.aliados.db.DatabaseHelper;
 import com.dataservicios.aliados.db.DatabaseManager;
 import com.dataservicios.aliados.model.Concourse;
 import com.dataservicios.aliados.model.Month;
-import com.dataservicios.aliados.model.User;
+import com.dataservicios.aliados.model.Client;
 import com.dataservicios.aliados.servicesApi.RestApiAdapter;
 import com.dataservicios.aliados.servicesApi.Service;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,13 +52,13 @@ public class ConcourseFragment extends Fragment {
     private Spinner spn_month;
     private Fragment fragment;
     private LinearLayout ly_container;
-    private User user;
+    private Client user;
     private Month month;
     private Dialog dialog;
 
     private DatabaseHelper helper;
 
-    public ConcourseFragment(User user) {
+    public ConcourseFragment(Client user) {
         // Required empty public constructor
         this.user = user;
         this.activity = getActivity();
@@ -143,7 +142,7 @@ public class ConcourseFragment extends Fragment {
 
 
         Map<String, String> map = new HashMap<String, String>();
-        map.put("id", user.getId_data());
+        /*map.put("id", user.getId_data());*/
         map.put("month", month.getMonth_number());
        // map.put("month", "04");
         map.put("year", String.valueOf(month.getYear_number()));
