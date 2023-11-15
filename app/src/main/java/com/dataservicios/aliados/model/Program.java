@@ -1,6 +1,8 @@
 package com.dataservicios.aliados.model;
 
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 
 import java.util.ArrayList;
 
@@ -30,16 +32,15 @@ public class Program {
     private String created_at;
 
 
-    @DatabaseField(foreign = true, foreignAutoRefresh = true)
-    private ArrayList<Category> categories;
+//    @DatabaseField(foreign = true, foreignAutoRefresh = true)
+//    private ArrayList<Category> categories;
+//
+//
+//
+//    public ArrayList<Category> getCategories() {
+//        return categories;
+//    }
 
-    public ArrayList<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(ArrayList<Category> categories) {
-        this.categories = categories;
-    }
 
     public int getId() {
         return id;
@@ -96,7 +97,6 @@ public class Program {
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
     }
-
 
     @Override
     public String toString () {
