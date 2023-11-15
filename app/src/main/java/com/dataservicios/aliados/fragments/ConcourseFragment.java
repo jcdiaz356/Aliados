@@ -28,7 +28,6 @@ import com.dataservicios.aliados.R;
 import com.dataservicios.aliados.db.DatabaseHelper;
 import com.dataservicios.aliados.db.DatabaseManager;
 import com.dataservicios.aliados.model.Concourse;
-import com.dataservicios.aliados.model.Month;
 import com.dataservicios.aliados.model.Client;
 import com.dataservicios.aliados.servicesApi.RestApiAdapter;
 import com.dataservicios.aliados.servicesApi.Service;
@@ -53,7 +52,6 @@ public class ConcourseFragment extends Fragment {
     private Fragment fragment;
     private LinearLayout ly_container;
     private Client user;
-    private Month month;
     private Dialog dialog;
 
     private DatabaseHelper helper;
@@ -76,15 +74,15 @@ public class ConcourseFragment extends Fragment {
         spn_month           = (Spinner) rootView.findViewById(R.id.spn_month);
 
 
-        ArrayList<Month> months = null;
-        try {
-//            months = (ArrayList<Month>) helper.getMonthDao().queryForAll();
-            months = (ArrayList<Month>) helper.getMonthDao().queryBuilder().orderBy("id",false).query();
-            showMonts(months);
-        } catch (SQLException e) {
-            Toast.makeText(getContext(), "No se encontraron datos", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
+//       // ArrayList<Month> months = null;
+//        try {
+////            months = (ArrayList<Month>) helper.getMonthDao().queryForAll();
+//            months = (ArrayList<Month>) helper.getMonthDao().queryBuilder().orderBy("id",false).query();
+//            showMonts(months);
+//        } catch (SQLException e) {
+//            Toast.makeText(getContext(), "No se encontraron datos", Toast.LENGTH_SHORT).show();
+//            e.printStackTrace();
+//        }
 
 
 
@@ -92,20 +90,20 @@ public class ConcourseFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //String label = parent.getItemAtPosition(position).toString();
-                int mount_id = ((Month) spn_month.getSelectedItem()).getId () ;
-                String label = ((Month) spn_month.getSelectedItem () ).getMount () ;
-                Toast.makeText(getContext(), label + String.valueOf(mount_id) , Toast.LENGTH_SHORT).show();
+//                int mount_id = ((Month) spn_month.getSelectedItem()).getId () ;
+//                String label = ((Month) spn_month.getSelectedItem () ).getMount () ;
+        //        Toast.makeText(getContext(), label + String.valueOf(mount_id) , Toast.LENGTH_SHORT).show();
 
-                ly_container.removeAllViews();
-                try {
-                    month =  helper.getMonthDao().queryForId(mount_id);
-                    getDataConcourse();
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getActivity(), "No se pudo encontrar datos", Toast.LENGTH_LONG).show();
-                    return;
-                }
+//                ly_container.removeAllViews();
+//                try {
+//                    month =  helper.getMonthDao().queryForId(mount_id);
+//                    getDataConcourse();
+//
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                    Toast.makeText(getActivity(), "No se pudo encontrar datos", Toast.LENGTH_LONG).show();
+//                    return;
+//                }
 
             }
             @Override
@@ -125,11 +123,11 @@ public class ConcourseFragment extends Fragment {
         return rootView;
     }
 
-    private void showMonts(ArrayList<Month> months) {
-        // this.months      = months;
-        ArrayAdapter<Month>    adapter             = new ArrayAdapter<Month>(this.getContext(),R.layout.simple_spinner_item, months);
-        spn_month.setAdapter(adapter);
-    }
+//    private void showMonts(ArrayList<Month> months) {
+//        // this.months      = months;
+//        ArrayAdapter<Month>    adapter             = new ArrayAdapter<Month>(this.getContext(),R.layout.simple_spinner_item, months);
+//        spn_month.setAdapter(adapter);
+//    }
 
     private void getDataConcourse(){
 
@@ -143,9 +141,9 @@ public class ConcourseFragment extends Fragment {
 
         Map<String, String> map = new HashMap<String, String>();
         /*map.put("id", user.getId_data());*/
-        map.put("month", month.getMonth_number());
+     //   map.put("month", month.getMonth_number());
        // map.put("month", "04");
-        map.put("year", String.valueOf(month.getYear_number()));
+    //    map.put("year", String.valueOf(month.getYear_number()));
 
         RestApiAdapter restApiAdapter = new RestApiAdapter();
         Service service =  restApiAdapter.getClientService(getContext());
@@ -185,7 +183,7 @@ public class ConcourseFragment extends Fragment {
                                         Toast.makeText(getContext(), dataConcourse.get("fullname").getAsString(),Toast.LENGTH_SHORT).show();
 
                                         //fragment = new ConcourseDetailFragment(user,month,dataConcourse.get("_id").getAsString());
-                                        fragment = new ConcourseDetailFragment(user,month,dataConcourse.get("_id").getAsString(),dataConcourse.get("concurse_detail_id").getAsInt());
+                                        fragment = new ConcourseDetailFragment(user,dataConcourse.get("_id").getAsString(),dataConcourse.get("concurse_detail_id").getAsInt());
                                         //getSupportFragmentManager().beginTransaction().remove(fragment).commit();
                                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment)
                                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)

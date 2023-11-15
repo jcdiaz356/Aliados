@@ -8,7 +8,6 @@ import android.util.Log;
 
 
 import com.dataservicios.aliados.model.Award;
-import com.dataservicios.aliados.model.Month;
 import com.dataservicios.aliados.model.Client;
 import com.dataservicios.aliados.model.Program;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
@@ -37,7 +36,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	private Dao<Client, Integer> ClientDao                      = null;
     private Dao<Program, Integer> ProgramDao                      = null;
     private Dao<Award, Integer> AwardDao                      = null;
-	private Dao<Month, Integer> MonthDao                      = null;
+
 
 	public DatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -53,7 +52,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Program.class                     );
             TableUtils.createTable(connectionSource, Award.class                     );
 
-			TableUtils.createTable(connectionSource, Month.class                     );
+
 
             Log.i(LOG_TAG, "execute method onCreate: Can't create Tables");
            // preloadData(db,myContext);
@@ -88,7 +87,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Program.class                     );
             TableUtils.createTable(connectionSource, Award.class                     );
 
-            TableUtils.dropTable(connectionSource, Month.class,true              );
 
             onCreate(db,connectionSource);
 
@@ -138,16 +136,6 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return AwardDao;
     }
 
-    public Dao<Month, Integer> getMonthDao() {
-        if (null == MonthDao) {
-            try {
-                MonthDao = getDao(Month.class);
-            }catch (java.sql.SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return MonthDao;
-    }
 
 
 

@@ -29,7 +29,7 @@
                 android:text="BIENVENIDO"
                 android:fontFamily="@font/montserrat_black"
                 android:textColor="@color/white"
-                android:textSize="12pt"
+                android:textSize="25dp"
                 android:paddingBottom="10dp"
                 />
 
@@ -45,7 +45,7 @@
                 android:text="CHARLES CCALLOCUNTO CONDE"
                 android:fontFamily="@font/montserrat_semibold"
                 android:textColor="@color/white"
-                android:textSize="12pt"
+                android:textSize="25dp"
                 android:textAlignment="center"
                 />
             <View
@@ -67,7 +67,7 @@
                     android:text="DEX:"
                     android:fontFamily="@font/montserrat_bold"
                     android:textColor="@color/white"
-                    android:textSize="7.6pt"
+                    android:textSize="18dp"
                     android:textAlignment="center"
                     />
                 <TextView
@@ -77,7 +77,7 @@
                     android:text="D L F MEDINA RIVERA SA"
                     android:fontFamily="@font/montserrat_semibold"
                     android:textColor="@color/white"
-                    android:textSize="7.6pt"
+                    android:textSize="18dp"
                     android:textAlignment="center"
                     />
             </LinearLayout>
@@ -94,7 +94,7 @@
                     android:text="FUERZA DE VENTA:"
                     android:fontFamily="@font/montserrat_bold"
                     android:textColor="@color/white"
-                    android:textSize="7.6pt"
+                    android:textSize="18dp"
                     android:textAlignment="center"
                     />
                 <TextView
@@ -104,7 +104,7 @@
                     android:text="BODEG4"
                     android:fontFamily="@font/montserrat_semibold"
                     android:textColor="@color/white"
-                    android:textSize="7.6pt"
+                    android:textSize="18dp"
                     android:textAlignment="center"
                     />
             </LinearLayout>
@@ -124,7 +124,7 @@
                     android:layout_height="50dp"
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
-                    android:id="@+id/spn_month"
+                    android:id="@+id/spn_program"
                     />
             </LinearLayout>
             <LinearLayout
@@ -141,7 +141,7 @@
                     android:text="0.00 %"
                     android:fontFamily="@font/montserrat_bold"
                     android:textColor="@color/white"
-                    android:textSize="10pt"
+                    android:textSize="18dp"
                     android:paddingRight="5dp"
                     android:paddingBottom="5dp"
                     android:textAlignment="center"
@@ -161,7 +161,7 @@
                     android:paddingBottom="5dp"
                     android:fontFamily="@font/montserrat_bold"
                     android:textColor="@color/white"
-                    android:textSize="10pt"
+                    android:textSize="18dp"
                     android:textAlignment="center"
                     />
             </LinearLayout>
@@ -178,7 +178,7 @@
                     android:text="0 %"
                     android:fontFamily="@font/montserrat_bold"
                     android:textColor="@color/white"
-                    android:textSize="12pt"
+                    android:textSize="26dp"
                     android:textAlignment="center"
                     />
 
@@ -204,10 +204,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_light"
+                            android:fontFamily="@font/montserrat_regular"
                             android:textColor="@color/black"
                             android:textSize="12dp"
-                            android:text="LLAVE GENERAL" />
+                            android:text="PLAN SI" />
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -220,7 +220,7 @@
                             android:text="0 %"
                             android:fontFamily="@font/montserrat_bold"
                             android:textColor="@color/black"
-                            android:textSize="12pt"
+                            android:textSize="26dp"
                             android:textAlignment="center"
                             />
                     </LinearLayout>
@@ -234,10 +234,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_light"
+                            android:fontFamily="@font/montserrat_regular"
                             android:textColor="@color/black"
                             android:textSize="12dp"
-                            android:text="FOODS" />
+                            android:text="REAL SI" />
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -250,7 +250,7 @@
                             android:text="0 %"
                             android:fontFamily="@font/montserrat_bold"
                             android:textColor="@color/black"
-                            android:textSize="12pt"
+                            android:textSize="26dp"
                             android:textAlignment="center"
                             />
                     </LinearLayout>
@@ -268,7 +268,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent" >
                     <LinearLayout
-                        android:layout_width="160dp"
+                        android:layout_width="260dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:padding="10dp"
@@ -277,10 +277,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_light"
+                            android:fontFamily="@font/montserrat_regular"
                             android:textColor="@color/black"
                             android:textSize="12dp"
-                            android:text="HOME CARE" />
+                            android:text="FALTA PARA ALCANZAR PLAN" />
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
@@ -293,40 +293,11 @@
                             android:text="0 %"
                             android:fontFamily="@font/montserrat_bold"
                             android:textColor="@color/black"
-                            android:textSize="12pt"
+                            android:textSize="26dp"
                             android:textAlignment="center"
                             />
                     </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="160dp"
-                        android:layout_height="wrap_content"
-                        android:padding="10dp"
-                        android:gravity="center"
-                        android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_light"
-                            android:textColor="@color/black"
-                            android:textSize="12dp"
-                            android:text="PERSONAL CARE" />
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="4dp"
-                            android:background="@color/black" />
-                        <TextView
-                            android:id="@+id/tv_personal_care"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="0 %"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:textColor="@color/black"
-                            android:textSize="12pt"
-                            android:textAlignment="center"
-                            />
-                    </LinearLayout>
 
                 </TableRow>
             </LinearLayout>

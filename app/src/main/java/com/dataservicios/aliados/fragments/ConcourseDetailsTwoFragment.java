@@ -22,7 +22,6 @@ import com.dataservicios.aliados.R;
 import com.dataservicios.aliados.db.DatabaseHelper;
 import com.dataservicios.aliados.db.DatabaseManager;
 import com.dataservicios.aliados.model.Concourse;
-import com.dataservicios.aliados.model.Month;
 import com.dataservicios.aliados.model.Client;
 import com.dataservicios.aliados.servicesApi.RestApiAdapter;
 import com.dataservicios.aliados.servicesApi.Service;
@@ -44,7 +43,7 @@ public class ConcourseDetailsTwoFragment extends Fragment {
     private TextView tv_concurso,tv_fuerza_venta,tv_tipo ;
 
     private Client user;
-    private Month month;
+
     private String concurse_id;
     private int concourse_detail_id;
 
@@ -52,10 +51,10 @@ public class ConcourseDetailsTwoFragment extends Fragment {
 
     private DatabaseHelper helper;
 
-    public ConcourseDetailsTwoFragment(Client user, Month month, String concurse_id, int concourse_detail_id) {
+    public ConcourseDetailsTwoFragment(Client user,  String concurse_id, int concourse_detail_id) {
         // Required empty public constructor
         this.user = user;
-        this.month = month;
+      //  this.month = month;
         this.concurse_id = concurse_id;
         this.concourse_detail_id = concourse_detail_id;
     }
@@ -66,7 +65,7 @@ public class ConcourseDetailsTwoFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_concourse_details_two, container, false);
 
         this.user = user;
-        this.month = month;
+    //    this.month = month;
         this.concurse_id = concurse_id;
 
         DatabaseManager.init(getContext());
@@ -104,10 +103,10 @@ public class ConcourseDetailsTwoFragment extends Fragment {
 
         Map<String, String> map = new HashMap<String, String>();
         /*map.put("id", user.getId_data());*/
-        map.put("month", month.getMonth_number());
+      //  map.put("month", month.getMonth_number());
 //        map.put("concourse_id", concurse_id);
         map.put("concourse_detail_id", String.valueOf(concourse_detail_id) );
-        map.put("year", String.valueOf(month.getYear_number()));
+   //     map.put("year", String.valueOf(month.getYear_number()));
 
         RestApiAdapter restApiAdapter = new RestApiAdapter();
         Service service =  restApiAdapter.getClientService(getContext());

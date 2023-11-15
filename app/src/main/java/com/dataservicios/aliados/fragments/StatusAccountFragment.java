@@ -25,7 +25,6 @@ import com.google.gson.JsonObject;
 import com.dataservicios.aliados.R;
 import com.dataservicios.aliados.db.DatabaseHelper;
 import com.dataservicios.aliados.db.DatabaseManager;
-import com.dataservicios.aliados.model.Month;
 import com.dataservicios.aliados.model.Client;
 import com.dataservicios.aliados.servicesApi.RestApiAdapter;
 import com.dataservicios.aliados.servicesApi.Service;
@@ -51,7 +50,7 @@ public class StatusAccountFragment extends Fragment {
     private DatabaseHelper helper;
 
 
-    private Month month;
+  //  private Month month;
     private Client user;
 
     public StatusAccountFragment(Client user) {
@@ -72,33 +71,33 @@ public class StatusAccountFragment extends Fragment {
         tbl_concurse = (TableLayout) rootView.findViewById(R.id.tbl_concurse);
 
 
-        ArrayList<Month> months = null;
-        try {
-           // months = (ArrayList<Month>) helper.getMonthDao().queryForAll();
-            months = (ArrayList<Month>) helper.getMonthDao().queryBuilder().orderBy("id",false).query();
-            showMonts(months);
-        } catch (SQLException e) {
-            Toast.makeText(getContext(), "No se encontraron datos", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
+//        ArrayList<Month> months = null;
+//        try {
+//           // months = (ArrayList<Month>) helper.getMonthDao().queryForAll();
+//            months = (ArrayList<Month>) helper.getMonthDao().queryBuilder().orderBy("id",false).query();
+//            showMonts(months);
+//        } catch (SQLException e) {
+//            Toast.makeText(getContext(), "No se encontraron datos", Toast.LENGTH_SHORT).show();
+//            e.printStackTrace();
+//        }
 
         spn_month.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //String label = parent.getItemAtPosition(position).toString();
-                int mount_id = ((Month) spn_month.getSelectedItem()).getId () ;
-                String label = ((Month) spn_month.getSelectedItem () ).getMount () ;
-                Toast.makeText(getContext(), label + String.valueOf(mount_id) , Toast.LENGTH_SHORT).show();
-
-                try {
-                    month =  helper.getMonthDao().queryForId(mount_id);
-                    getData();
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getActivity(), "No se pudo encontrar datos", Toast.LENGTH_LONG).show();
-                    return;
-                }
+//                int mount_id = ((Month) spn_month.getSelectedItem()).getId () ;
+//                String label = ((Month) spn_month.getSelectedItem () ).getMount () ;
+//                Toast.makeText(getContext(), label + String.valueOf(mount_id) , Toast.LENGTH_SHORT).show();
+//
+//                try {
+//                    month =  helper.getMonthDao().queryForId(mount_id);
+//                    getData();
+//
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                    Toast.makeText(getActivity(), "No se pudo encontrar datos", Toast.LENGTH_LONG).show();
+//                    return;
+//                }
 
             }
             @Override
@@ -119,11 +118,11 @@ public class StatusAccountFragment extends Fragment {
     }
 
 
-    private void showMonts(ArrayList<Month> months) {
-        // this.months      = months;
-        ArrayAdapter<Month>    adapter             = new ArrayAdapter<Month>(this.getContext(),R.layout.simple_spinner_item, months);
-        spn_month.setAdapter(adapter);
-    }
+//    private void showMonts(ArrayList<Month> months) {
+//        // this.months      = months;
+//        ArrayAdapter<Month>    adapter             = new ArrayAdapter<Month>(this.getContext(),R.layout.simple_spinner_item, months);
+//        spn_month.setAdapter(adapter);
+//    }
 
 
     private void getData(){
@@ -135,8 +134,8 @@ public class StatusAccountFragment extends Fragment {
 
         Map<String, String> map = new HashMap<String, String>();
         /*map.put("id", user.getId_data());*/
-        map.put("month", month.getMonth_number());
-        map.put("year", String.valueOf(month.getYear_number()));
+//        map.put("month", month.getMonth_number());
+//        map.put("year", String.valueOf(month.getYear_number()));
 
         RestApiAdapter restApiAdapter = new RestApiAdapter();
         Service service =  restApiAdapter.getClientService(getContext());

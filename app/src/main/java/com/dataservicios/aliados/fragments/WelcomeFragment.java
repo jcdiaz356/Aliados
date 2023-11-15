@@ -22,12 +22,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dataservicios.aliados.model.Program;
+import com.dataservicios.aliados.repo.ProgramRepo;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.dataservicios.aliados.R;
 import com.dataservicios.aliados.db.DatabaseHelper;
 import com.dataservicios.aliados.db.DatabaseManager;
-import com.dataservicios.aliados.model.Month;
 import com.dataservicios.aliados.model.Client;
 import com.dataservicios.aliados.servicesApi.RestApiAdapter;
 import com.dataservicios.aliados.servicesApi.Service;
@@ -48,19 +49,17 @@ public class WelcomeFragment extends Fragment {
     private static final String LOG_TAG = WelcomeFragment.class.getSimpleName();
 
     private Activity activity;
-    private Spinner spn_month;
-    private TextView tv_user_name,tv_dex,tv_fuerza_venta,tv_llave_general,tv_foods,tv_home_care,tv_personal_care,tv_porc_gestion,tv_updated_at;
+    private Spinner spn_program;
+    private TextView tv_user_name,tv_dex,tv_fuerza_venta,tv_llave_general,tv_foods,tv_home_care,tv_porc_gestion,tv_updated_at;
     private ImageView iv_porc_gestion;
     private Dialog dialog;
+    private Client client;
 
-    private DatabaseHelper helper;
+    private ProgramRepo programRepo;
 
-    private Month month;
-    private Client user;
-
-    public WelcomeFragment(Client user) {
+    public WelcomeFragment(Client client) {
         // Required empty public constructor
-        this.user = user;
+        this.client = client;
         this.activity = getActivity();
     }
 
@@ -71,10 +70,10 @@ public class WelcomeFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_welcome, container, false);
 
         DatabaseManager.init(getContext());
-        helper = DatabaseManager.getInstance().getHelper();
 
+        programRepo = new ProgramRepo(activity);
 
-        spn_month           = (Spinner) rootView.findViewById(R.id.spn_month);
+        spn_program           = (Spinner) rootView.findViewById(R.id.spn_program);
         tv_user_name    = (TextView) rootView.findViewById(R.id.tv_user_name);
         tv_dex      = (TextView) rootView.findViewById(R.id.tv_dex) ;
         tv_fuerza_venta = (TextView) rootView.findViewById(R.id.tv_fuerza_venta);
@@ -82,47 +81,40 @@ public class WelcomeFragment extends Fragment {
         tv_llave_general = (TextView) rootView.findViewById(R.id.tv_llave_general);
         tv_foods = (TextView) rootView.findViewById(R.id.tv_foods);
         tv_home_care = (TextView) rootView.findViewById(R.id.tv_home_care);
-        tv_personal_care = (TextView) rootView.findViewById(R.id.tv_personal_care);
+
         tv_porc_gestion = (TextView) rootView.findViewById(R.id.tv_porc_gestion);
         tv_updated_at = (TextView) rootView.findViewById(R.id.tv_updated_at);
         iv_porc_gestion = (ImageView) rootView.findViewById(R.id.iv_porc_gestion);
 
-        /*tv_user_name.setText(user.getName());
-        tv_dex.setText(user.getDex());
-        tv_fuerza_venta.setText(user.getFfvv());*/
+        tv_user_name.setText(client.getFullname());
+//        tv_dex.setText(user.getDex());
+//        tv_fuerza_venta.setText(user.getFfvv());
 
 
 
 
-        ArrayList<Month> months = null;
-        try {
-//            months = (ArrayList<Month>) helper.getMonthDao().queryForAll();
-            months = (ArrayList<Month>) helper.getMonthDao().queryBuilder().orderBy("id",false).query();
-            showMonts(months);
-        } catch (SQLException e) {
-            Toast.makeText(getContext(), "No se encontraron datos", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
+//        ArrayList<Month> months = null;
+//        try {
+////            months = (ArrayList<Month>) helper.getMonthDao().queryForAll();
+//            months = (ArrayList<Month>) helper.getMonthDao().queryBuilder().orderBy("id",false).query();
+//            showMonts(months);
+//        } catch (SQLException e) {
+//            Toast.makeText(getContext(), "No se encontraron datos", Toast.LENGTH_SHORT).show();
+//            e.printStackTrace();
+//        }
 
+        ArrayList<Program> programs = (ArrayList<Program>) programRepo.findAll();
+        showLoadPrograms(programs);
 
-
-        spn_month.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spn_program.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //String label = parent.getItemAtPosition(position).toString();
-                int mount_id = ((Month) spn_month.getSelectedItem()).getId () ;
-                String label = ((Month) spn_month.getSelectedItem () ).getMount () ;
-                Toast.makeText(getContext(), label + String.valueOf(mount_id) , Toast.LENGTH_SHORT).show();
-
-                try {
-                    month =  helper.getMonthDao().queryForId(mount_id);
-                    getDataWelcome();
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    Toast.makeText(getActivity(), "No se pudo encontrar datos", Toast.LENGTH_LONG).show();
-                    return;
-                }
+               // String label = parent.getItemAtPosition(position).toString();
+                int program_id = ((Program) spn_program.getSelectedItem()).getId () ;
+                String label = ((Program) spn_program.getSelectedItem()).getMonth() ;
+               //
+                programRepo.findById(program_id);
+                Toast.makeText(getContext(), label + String.valueOf(program_id) , Toast.LENGTH_SHORT).show();
 
             }
             @Override
@@ -136,10 +128,10 @@ public class WelcomeFragment extends Fragment {
         return rootView;
     }
 
-    private void showMonts(ArrayList<Month> months) {
+    private void showLoadPrograms(ArrayList<Program> programs) {
        // this.months      = months;
-        ArrayAdapter<Month>    adapter             = new ArrayAdapter<Month>(this.getContext(),R.layout.simple_spinner_item, months);
-        spn_month.setAdapter(adapter);
+        ArrayAdapter<Program>    adapter             = new ArrayAdapter<Program>(this.getContext(),R.layout.simple_spinner_item, programs);
+        spn_program.setAdapter(adapter);
     }
 
     private void getDataWelcome(){
@@ -151,8 +143,8 @@ public class WelcomeFragment extends Fragment {
 
         Map<String, String> map = new HashMap<String, String>();
         /*map.put("id", user.getId_data());*/
-        map.put("month", month.getMonth_number());
-        map.put("year", String.valueOf(month.getYear_number()));
+//        map.put("month", month.getMonth_number());
+//        map.put("year", String.valueOf(month.getYear_number()));
 
         RestApiAdapter restApiAdapter = new RestApiAdapter();
         Service service =  restApiAdapter.getClientService(getContext());
@@ -188,7 +180,7 @@ public class WelcomeFragment extends Fragment {
                                 tv_llave_general.setText(key_gen + " %");
                                 tv_foods.setText(key_food + " %");
                                 tv_home_care.setText(key_home + " %");
-                                tv_personal_care.setText(key_personal + " %");
+
                                 tv_porc_gestion.setText(porc_gestion);
                                 tv_updated_at.setText(updated_at);
 

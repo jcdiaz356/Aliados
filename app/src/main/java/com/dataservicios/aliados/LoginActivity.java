@@ -20,7 +20,6 @@ import android.widget.Toast;
 import com.dataservicios.aliados.model.Award;
 import com.dataservicios.aliados.model.Program;
 import com.dataservicios.aliados.repo.AwardRepo;
-import com.dataservicios.aliados.repo.MonthRepo;
 import com.dataservicios.aliados.repo.ClientRepo;
 import com.dataservicios.aliados.repo.ProgramRepo;
 import com.google.android.material.textfield.TextInputEditText;
@@ -31,7 +30,6 @@ import com.google.gson.JsonObject;
 import com.ornach.nobobutton.NoboButton;
 import com.dataservicios.aliados.db.DatabaseHelper;
 import com.dataservicios.aliados.db.DatabaseManager;
-import com.dataservicios.aliados.model.Month;
 import com.dataservicios.aliados.model.Client;
 import com.dataservicios.aliados.servicesApi.RestApiAdapter;
 import com.dataservicios.aliados.servicesApi.Service;
@@ -57,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseHelper helper;
     private int client_id;
     private ClientRepo clientRepo;
-    private MonthRepo monthRepo;
+//    private MonthRepo monthRepo;
 
     private ProgramRepo programRepo;
 
@@ -73,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         helper = DatabaseManager.getInstance().getHelper();
 
         clientRepo = new ClientRepo(activity);
-        monthRepo = new MonthRepo(activity);
+//        monthRepo = new MonthRepo(activity);
         programRepo = new ProgramRepo(activity);
         awardRepo = new AwardRepo(activity);
 
@@ -173,29 +171,29 @@ public class LoginActivity extends AppCompatActivity {
                                     // Creando el objeto mounth
                                     // *********************************
                                    // JsonArray months = clientJsonObject.getAsJsonArray("months");
-                                    JsonArray months = clientJsonObject.getAsJsonArray("months");
+                                    //JsonArray months = clientJsonObject.getAsJsonArray("months");
                                     // ********* Eliminando todo los meses si existe *********************
-                                    List<Month> itemsMonth = null;
+                                    //List<Month> itemsMonth = null;
                                     //itemsMonth = helper.getMonthDao().queryForAll();
 
-                                    Log.d(LOG_TAG, "Obteniedo Todos los clientes para limpiar");
-                                    for (Month object : itemsMonth) {
-                                        //helper.getMonthDao().deleteById(object.getId());
-                                        monthRepo.delete(object);
-                                        Log.d(LOG_TAG, "Eliminando Mes:" + object.toString());
-                                    }
+//                                    Log.d(LOG_TAG, "Obteniedo Todos los clientes para limpiar");
+//                                    for (Month object : itemsMonth) {
+//                                        //helper.getMonthDao().deleteById(object.getId());
+//                                        monthRepo.delete(object);
+//                                        Log.d(LOG_TAG, "Eliminando Mes:" + object.toString());
+//                                    }
 
 
-                                    for (int i = 0; i < months.size(); i++) {
-                                        JsonObject month =  months.get(i).getAsJsonObject();
-                                        Month newMont = new Month();
-                                        newMont.setId(month.get("month_number").getAsInt());
-                                        newMont.setMonth_number(month.get("month_number").getAsString());
-                                        newMont.setMount(month.get("month").getAsString());
-                                        newMont.setYear_number(month.get("year_number").getAsInt());
-                                       //  helper.getMonthDao().create(newMont);
-                                        monthRepo.create(newMont);
-                                    }
+//                                    for (int i = 0; i < months.size(); i++) {
+//                                        JsonObject month =  months.get(i).getAsJsonObject();
+//                                        Month newMont = new Month();
+//                                        newMont.setId(month.get("month_number").getAsInt());
+//                                        newMont.setMonth_number(month.get("month_number").getAsString());
+//                                        newMont.setMount(month.get("month").getAsString());
+//                                        newMont.setYear_number(month.get("year_number").getAsInt());
+//                                       //  helper.getMonthDao().create(newMont);
+//                                        monthRepo.create(newMont);
+//                                    }
 
                                     Intent intent = new Intent(activity, PanelAdminActivity.class);
                                     intent.putExtra("client_id"              , client_id);

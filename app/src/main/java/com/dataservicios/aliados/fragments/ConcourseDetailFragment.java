@@ -24,7 +24,6 @@ import com.dataservicios.aliados.R;
 import com.dataservicios.aliados.db.DatabaseHelper;
 import com.dataservicios.aliados.db.DatabaseManager;
 import com.dataservicios.aliados.model.Concourse;
-import com.dataservicios.aliados.model.Month;
 import com.dataservicios.aliados.model.Client;
 import com.dataservicios.aliados.servicesApi.RestApiAdapter;
 import com.dataservicios.aliados.servicesApi.Service;
@@ -48,7 +47,7 @@ public class ConcourseDetailFragment extends Fragment {
     private TextView tv_concurso,tv_fuerza_venta,tv_tipo ;
 
     private Client user;
-    private Month month;
+
     private String concurse_id;
     private int concourse_detail_id;
 
@@ -56,10 +55,10 @@ public class ConcourseDetailFragment extends Fragment {
 
     private DatabaseHelper helper;
 
-    public ConcourseDetailFragment(Client user, Month month, String concurse_id, int concourse_detail_id) {
+    public ConcourseDetailFragment(Client user,  String concurse_id, int concourse_detail_id) {
         // Required empty public constructor
         this.user = user;
-        this.month = month;
+      //  this.month = month;
         this.concurse_id = concurse_id;
         this.concourse_detail_id = concourse_detail_id;
     }
@@ -95,7 +94,7 @@ public class ConcourseDetailFragment extends Fragment {
         btn_view_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fragment = new ConcourseDetailsTwoFragment(user,month,concurse_id,concourse_detail_id);
+                fragment = new ConcourseDetailsTwoFragment(user,concurse_id,concourse_detail_id);
                 //getSupportFragmentManager().beginTransaction().remove(fragment).commit();
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -118,10 +117,10 @@ public class ConcourseDetailFragment extends Fragment {
 
         Map<String, String> map = new HashMap<String, String>();
         /*map.put("id", user.getId_data());*/
-        map.put("month", month.getMonth_number());
+      //  map.put("month", month.getMonth_number());
 //         map.put("concourse_id", concurse_id);
        map.put("concourse_detail_id", String.valueOf(concourse_detail_id));
-        map.put("year", String.valueOf(month.getYear_number()));
+  //      map.put("year", String.valueOf(month.getYear_number()));
 
         RestApiAdapter restApiAdapter = new RestApiAdapter();
         Service service =  restApiAdapter.getClientService(getContext());

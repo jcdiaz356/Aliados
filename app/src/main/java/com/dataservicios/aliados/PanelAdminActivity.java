@@ -12,12 +12,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
+import com.dataservicios.aliados.repo.ClientRepo;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
-import com.dataservicios.aliados.db.DatabaseHelper;
 import com.dataservicios.aliados.db.DatabaseManager;
 import com.dataservicios.aliados.fragments.ConcourseFragment;
 import com.dataservicios.aliados.fragments.PromotionsFragment;
@@ -35,8 +34,9 @@ public class PanelAdminActivity extends AppCompatActivity {
     private BottomNavigationView nav_view;
     private Fragment fragment;
     private Toolbar toolbar;
-    private Client user;
-    private DatabaseHelper helper;
+    private Client client;
+
+    private ClientRepo clientRepo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,16 +47,10 @@ public class PanelAdminActivity extends AppCompatActivity {
         int user_id   = bundle.getInt("user_id");
 
         DatabaseManager.init(activity);
-        helper = DatabaseManager.getInstance().getHelper();
+        clientRepo = new ClientRepo(activity);
+        client = (Client) clientRepo.findById(user_id);
 
-        try {
-            user =  helper.getClientDao().queryForId(user_id);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            Toast.makeText(activity, "No se pudo encontrar el usuario", Toast.LENGTH_LONG).show();
-            return;
-        }
-        fragment = new WelcomeFragment(user);
+        fragment = new WelcomeFragment(client);
         //getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -71,7 +65,7 @@ public class PanelAdminActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.page_home:
 
-                        fragment = new WelcomeFragment(user);
+                        fragment = new WelcomeFragment(client);
                         //getSupportFragmentManager().beginTransaction().remove(fragment).commit();
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -79,20 +73,20 @@ public class PanelAdminActivity extends AppCompatActivity {
 
                         break;
                     case R.id.page_status_account:
-                        fragment = new StatusAccountFragment(user);
+                        fragment = new StatusAccountFragment(client);
                         //getSupportFragmentManager().beginTransaction().remove(fragment).commit();
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .addToBackStack(null).commit();
                         break;
                     case R.id.page_concourse:
-                        fragment = new ConcourseFragment(user);
+                        fragment = new ConcourseFragment(client);
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .addToBackStack(null).commit();
                         break;
                     case R.id.page_promotions:
-                        fragment = new PromotionsFragment(user);
+                        fragment = new PromotionsFragment(client);
                         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .addToBackStack(null).commit();
@@ -126,22 +120,7 @@ public class PanelAdminActivity extends AppCompatActivity {
 
             case R.id.navigation_close:
 
-                List<Client> items = null;
-                try {
-                    items = helper.getClientDao().queryForAll();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                Log.d(LOG_TAG, "Obteniedo Todos los clientes para limpiar");
-                for (Client object : items) {
-                    try {
-                        helper.getClientDao().deleteById(object.getId());
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                    Log.d(LOG_TAG, "Eliminando User:" + object.toString());
-                }
-
+               clientRepo.deleteAll();
 
                 i = new Intent(activity, LoginActivity.class);
                 i.putExtra("session_create"              , false);
@@ -151,10 +130,8 @@ public class PanelAdminActivity extends AppCompatActivity {
 
             case R.id.navigation_change_password:
 
-
-
                 i = new Intent(activity, ChangePasswordActivity.class);
-                i.putExtra("code"              , user.getCode());
+                i.putExtra("code"              , client.getCode());
                 startActivity(i);
                // finish();
 
