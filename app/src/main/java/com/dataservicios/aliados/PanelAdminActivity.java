@@ -44,11 +44,11 @@ public class PanelAdminActivity extends AppCompatActivity {
         showToolbar("",true);
 
         Bundle bundle = getIntent().getExtras();
-        int user_id   = bundle.getInt("user_id");
+        int client_id   = bundle.getInt("client_id");
 
         DatabaseManager.init(activity);
         clientRepo = new ClientRepo(activity);
-        client = (Client) clientRepo.findById(user_id);
+        client = (Client) clientRepo.findById(client_id);
 
         fragment = new WelcomeFragment(client);
         //getSupportFragmentManager().beginTransaction().remove(fragment).commit();
