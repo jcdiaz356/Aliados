@@ -22,7 +22,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dataservicios.aliados.model.Award;
 import com.dataservicios.aliados.model.Program;
+import com.dataservicios.aliados.repo.AwardRepo;
+import com.dataservicios.aliados.repo.ClientRepo;
 import com.dataservicios.aliados.repo.ProgramRepo;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -35,8 +38,13 @@ import com.dataservicios.aliados.servicesApi.Service;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -55,7 +63,11 @@ public class WelcomeFragment extends Fragment {
     private Dialog dialog;
     private Client client;
 
+    private Award award;
+
     private ProgramRepo programRepo;
+
+    private AwardRepo awardRepo;
 
     public WelcomeFragment(Client client) {
         // Required empty public constructor
@@ -72,6 +84,7 @@ public class WelcomeFragment extends Fragment {
         DatabaseManager.init(getContext());
 
         programRepo = new ProgramRepo(activity);
+        awardRepo = new AwardRepo(activity);
 
         spn_program           = (Spinner) rootView.findViewById(R.id.spn_program);
         tv_user_name    = (TextView) rootView.findViewById(R.id.tv_user_name);
@@ -105,6 +118,7 @@ public class WelcomeFragment extends Fragment {
 
         ArrayList<Program> programs = (ArrayList<Program>) programRepo.findAll();
         showLoadPrograms(programs);
+        getDataWelcome();
 
         spn_program.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -146,7 +160,60 @@ public class WelcomeFragment extends Fragment {
 //        map.put("month", month.getMonth_number());
 //        map.put("year", String.valueOf(month.getYear_number()));
 
-        RestApiAdapter restApiAdapter = new RestApiAdapter();
+        DatabaseManager.init(activity);
+        awardRepo = new AwardRepo(activity);
+        award = (Award) awardRepo.findFirstReg();
+
+        // Crea un objeto NumberFormat para el formato deseado
+        NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
+        // Aplica el formato al número
+        String planSi = numberFormat.format(award.getPlan_total());
+
+        tv_llave_general.setText("S/."+planSi);
+        String realSi = numberFormat.format(award.getReal_total());
+        tv_foods.setText("S/."+realSi);
+        String faltante = numberFormat.format(award.getPlan_total()-award.getReal_total());
+        tv_home_care.setText("S/."+faltante);
+
+        // Crea un objeto SimpleDateFormat para el formato deseado
+        SimpleDateFormat formatoOriginal = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
+        try {
+            // Convierte la cadena a un objeto Date
+            Date miFecha = formatoOriginal.parse(award.getFecha());
+
+            // Crea un objeto SimpleDateFormat para el formato deseado
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+
+            // Aplica el formato a la fecha
+            String fechaFormateada = formatoFecha.format(miFecha);
+
+            // Muestra la fecha formateada en tu TextView
+            tv_updated_at.setText(fechaFormateada);
+        } catch (ParseException e) {
+            // Maneja la excepción en caso de error al analizar la cadena
+            e.printStackTrace();
+            // Puedes mostrar un mensaje de error o realizar alguna otra acción adecuada
+        }
+
+        /*float value_key_personal = Float.valueOf(award.getAvance_total());*/
+        float value_key_personal = award.getAvance_total().floatValue();
+        if(value_key_personal >=0 && value_key_personal < 10)  iv_porc_gestion.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.crono_1xxxhdpi));
+        if(value_key_personal >=10 && value_key_personal < 20)  iv_porc_gestion.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.crono_2xxxhdpi));
+        if(value_key_personal >=20 && value_key_personal < 30)  iv_porc_gestion.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.crono_3xxxhdpi));
+        if(value_key_personal >=30 && value_key_personal < 40)  iv_porc_gestion.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.crono_4xxxhdpi));
+        if(value_key_personal >=40 && value_key_personal < 50)  iv_porc_gestion.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.crono_4xxxhdpi));
+        if(value_key_personal == 50)  iv_porc_gestion.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.crono_5xxxhdpi));
+        if(value_key_personal >50 && value_key_personal < 60)  iv_porc_gestion.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.crono_6xxxhdpi));
+        if(value_key_personal >=60 && value_key_personal < 70)  iv_porc_gestion.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.crono_7xxxhdpi));
+        if(value_key_personal >=70 && value_key_personal < 80)  iv_porc_gestion.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.crono_8xxxhdpi));
+        if(value_key_personal >=80 && value_key_personal < 90)  iv_porc_gestion.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.crono_9xxxhdpi));
+        if(value_key_personal >=90 && value_key_personal < 100)  iv_porc_gestion.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.crono_9xxxhdpi));
+        if( value_key_personal == 100)  iv_porc_gestion.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.crono_10xxxhdpi));
+
+        dialog.dismiss();
+
+        /*RestApiAdapter restApiAdapter = new RestApiAdapter();
         Service service =  restApiAdapter.getClientService(getContext());
         Call<JsonObject> call =  service.getIndicatorsHome(map);
 
@@ -240,7 +307,7 @@ public class WelcomeFragment extends Fragment {
 
             }
 
-        });
+        });*/
     }
 
 
