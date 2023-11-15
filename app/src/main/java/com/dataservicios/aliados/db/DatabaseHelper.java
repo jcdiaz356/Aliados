@@ -8,6 +8,7 @@ import android.util.Log;
 
 
 import com.dataservicios.aliados.model.Award;
+import com.dataservicios.aliados.model.Category;
 import com.dataservicios.aliados.model.AwardDetail;
 import com.dataservicios.aliados.model.Client;
 import com.dataservicios.aliados.model.Program;
@@ -37,6 +38,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	private Dao<Client, Integer> ClientDao                      = null;
     private Dao<Program, Integer> ProgramDao                      = null;
     private Dao<Award, Integer> AwardDao                      = null;
+    private Dao<Category, Integer> CategoryDao                      = null;
 
     private Dao<AwardDetail, Integer> AwardDetailDao                      = null;
 
@@ -55,6 +57,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Program.class                     );
             TableUtils.createTable(connectionSource, Award.class                     );
             TableUtils.createTable(connectionSource, AwardDetail.class                     );
+            TableUtils.createTable(connectionSource, Category.class                     );
 
 
 
@@ -91,6 +94,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Program.class                     );
             TableUtils.createTable(connectionSource, Award.class                     );
             TableUtils.createTable(connectionSource, AwardDetail.class                     );
+            TableUtils.createTable(connectionSource, Category.class                     );
 
 
             onCreate(db,connectionSource);
@@ -151,6 +155,17 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         }
         return AwardDetailDao;
     }
+    public Dao<Category, Integer> getCategoryDao() {
+        if (null == CategoryDao) {
+            try {
+                CategoryDao = getDao(Category.class);
+            }catch (java.sql.SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return CategoryDao;
+    }
+
 
 
 
