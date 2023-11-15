@@ -48,7 +48,8 @@ public class ConcourseFragment extends Fragment {
 
    // private ViewButton btn_0;
    private Activity activity;
-    private Spinner spn_month;
+    private TextView tv_fecha_inicio,tv_fecha_fin,tv_description;
+
     private Fragment fragment;
     private LinearLayout ly_container;
     private Client user;
@@ -71,63 +72,16 @@ public class ConcourseFragment extends Fragment {
         DatabaseManager.init(getContext());
         helper = DatabaseManager.getInstance().getHelper();
 
-        spn_month           = (Spinner) rootView.findViewById(R.id.spn_month);
 
 
-//       // ArrayList<Month> months = null;
-//        try {
-////            months = (ArrayList<Month>) helper.getMonthDao().queryForAll();
-//            months = (ArrayList<Month>) helper.getMonthDao().queryBuilder().orderBy("id",false).query();
-//            showMonts(months);
-//        } catch (SQLException e) {
-//            Toast.makeText(getContext(), "No se encontraron datos", Toast.LENGTH_SHORT).show();
-//            e.printStackTrace();
-//        }
-
-
-
-        spn_month.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //String label = parent.getItemAtPosition(position).toString();
-//                int mount_id = ((Month) spn_month.getSelectedItem()).getId () ;
-//                String label = ((Month) spn_month.getSelectedItem () ).getMount () ;
-        //        Toast.makeText(getContext(), label + String.valueOf(mount_id) , Toast.LENGTH_SHORT).show();
-
-//                ly_container.removeAllViews();
-//                try {
-//                    month =  helper.getMonthDao().queryForId(mount_id);
-//                    getDataConcourse();
-//
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(getActivity(), "No se pudo encontrar datos", Toast.LENGTH_LONG).show();
-//                    return;
-//                }
-
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-
-
-        ly_container = (LinearLayout) rootView.findViewById(R.id.ly_container);
-        ly_container.removeAllViews();
+//        ly_container = (LinearLayout) rootView.findViewById(R.id.ly_container);
+//        ly_container.removeAllViews();
 
 
 
         return rootView;
     }
 
-//    private void showMonts(ArrayList<Month> months) {
-//        // this.months      = months;
-//        ArrayAdapter<Month>    adapter             = new ArrayAdapter<Month>(this.getContext(),R.layout.simple_spinner_item, months);
-//        spn_month.setAdapter(adapter);
-//    }
 
     private void getDataConcourse(){
 
@@ -137,7 +91,6 @@ public class ConcourseFragment extends Fragment {
 
         ArrayList<Concourse> concourses  = new ArrayList<Concourse>();
         Concourse concourse = new Concourse();
-
 
         Map<String, String> map = new HashMap<String, String>();
         /*map.put("id", user.getId_data());*/

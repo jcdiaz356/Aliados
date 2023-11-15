@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             public void onFinish() {
 
                 List<Client> items = null;
-                Client user = null;
+                Client client = null;
 //                try {
                    // items = helper.getUserDao().queryForAll();
                     items = (List<Client>) userRepo.findAll();
@@ -79,18 +79,18 @@ public class MainActivity extends AppCompatActivity {
 //                }
                 Log.d(LOG_TAG, "Obteniedo Todos los clientes para limpiar");
                 for (Client object : items) {
-                    user = (Client) object;
+                    client = (Client) object;
                 }
-                if(user == null) {
+                if(client == null) {
                     Intent i = new Intent(activity, LoginActivity.class);
                     // i.putExtra("session_create"              , sessionCreate);
                     startActivity(i);
                     finish();
                 } else {
-                    if(user.getSave_ssesion() == 1) {
+                    if(client.getSave_ssesion() == 1) {
                         Intent intent = new Intent(activity, PanelAdminActivity.class);
-                        int user_id = user.getId();
-                        intent.putExtra("user_id"              , user_id);
+                        int client_id = client.getId();
+                        intent.putExtra("client_id"              , client_id);
                         startActivity(intent);
                         finish();
                     } else{
