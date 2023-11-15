@@ -2,6 +2,8 @@ package com.dataservicios.aliados.model;
 
 import com.j256.ormlite.field.DatabaseField;
 
+import java.util.ArrayList;
+
 public class Program {
 
     @DatabaseField(id = true)
@@ -26,6 +28,18 @@ public class Program {
 
     @DatabaseField
     private String created_at;
+
+
+    @DatabaseField(foreign = true, foreignAutoRefresh = true)
+    private ArrayList<Category> categories;
+
+    public ArrayList<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(ArrayList<Category> categories) {
+        this.categories = categories;
+    }
 
     public int getId() {
         return id;
