@@ -8,6 +8,7 @@ import android.util.Log;
 
 
 import com.dataservicios.aliados.model.Award;
+import com.dataservicios.aliados.model.AwardDetail;
 import com.dataservicios.aliados.model.Client;
 import com.dataservicios.aliados.model.Program;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
@@ -37,6 +38,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Program, Integer> ProgramDao                      = null;
     private Dao<Award, Integer> AwardDao                      = null;
 
+    private Dao<AwardDetail, Integer> AwardDetailDao                      = null;
+
 
 	public DatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -51,6 +54,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 			TableUtils.createTable(connectionSource, Client.class                     );
             TableUtils.createTable(connectionSource, Program.class                     );
             TableUtils.createTable(connectionSource, Award.class                     );
+            TableUtils.createTable(connectionSource, AwardDetail.class                     );
 
 
 
@@ -86,6 +90,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.dropTable(connectionSource, Client.class,true              );
             TableUtils.createTable(connectionSource, Program.class                     );
             TableUtils.createTable(connectionSource, Award.class                     );
+            TableUtils.createTable(connectionSource, AwardDetail.class                     );
 
 
             onCreate(db,connectionSource);
@@ -136,6 +141,16 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return AwardDao;
     }
 
+    public Dao<AwardDetail, Integer> getAwardDetailDao() {
+        if (null == AwardDetailDao) {
+            try {
+                AwardDetailDao = getDao(AwardDetail.class);
+            }catch (java.sql.SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return AwardDetailDao;
+    }
 
 
 

@@ -18,7 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dataservicios.aliados.model.Award;
+import com.dataservicios.aliados.model.AwardDetail;
 import com.dataservicios.aliados.model.Program;
+import com.dataservicios.aliados.repo.AwardDetailRepo;
 import com.dataservicios.aliados.repo.AwardRepo;
 import com.dataservicios.aliados.repo.ClientRepo;
 import com.dataservicios.aliados.repo.ProgramRepo;
@@ -61,6 +63,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private AwardRepo awardRepo;
 
+    private AwardDetailRepo awardDetailRepo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
 //        monthRepo = new MonthRepo(activity);
         programRepo = new ProgramRepo(activity);
         awardRepo = new AwardRepo(activity);
+        awardDetailRepo = new AwardDetailRepo(activity);
 
 
         dialog  = new Dialog(activity);
@@ -165,6 +170,16 @@ public class LoginActivity extends AppCompatActivity {
 
 
                                     awardRepo.create(newAward);
+
+                                    // **********************************
+                                    // Creando el array de objeto AwardDetail
+                                    // *********************************
+
+                                    awardDetailRepo.deleteAll();
+                                    JsonArray awardDetails = clientJsonObject.getAsJsonArray("award_details");
+                                    AwardDetail newAwardDetail = new Gson().fromJson(awardDetails, AwardDetail.class);
+
+                                    awardDetailRepo.create(newAwardDetail);
 
 
                                     // **********************************
