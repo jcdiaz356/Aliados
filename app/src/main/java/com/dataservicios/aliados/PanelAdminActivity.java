@@ -85,12 +85,12 @@ public class PanelAdminActivity extends AppCompatActivity {
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .addToBackStack(null).commit();
                         break;
-                    case R.id.page_promotions:
-                        fragment = new PromotionsFragment(client);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment)
-                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                                .addToBackStack(null).commit();
-                        break;
+//                    case R.id.page_promotions:
+//                        fragment = new PromotionsFragment(client);
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment)
+//                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+//                                .addToBackStack(null).commit();
+//                        break;
                     default:
                         throw new IllegalArgumentException("item not implemented : " + item.getItemId());
                 }

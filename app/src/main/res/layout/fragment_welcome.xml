@@ -45,7 +45,7 @@
                 android:text="CHARLES CCALLOCUNTO CONDE"
                 android:fontFamily="@font/montserrat_semibold"
                 android:textColor="@color/white"
-                android:textSize="25dp"
+                android:textSize="20dp"
                 android:textAlignment="center"
                 />
             <View
@@ -61,20 +61,20 @@
                 android:orientation="horizontal"
                 android:paddingTop="10dp"
                 >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="DEX:"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:textColor="@color/white"
-                    android:textSize="18dp"
-                    android:textAlignment="center"
-                    />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="DEX:"-->
+<!--                    android:fontFamily="@font/montserrat_bold"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="18dp"-->
+<!--                    android:textAlignment="center"-->
+<!--                    />-->
                 <TextView
                     android:id="@+id/tv_dex"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="D L F MEDINA RIVERA SA"
+                    android:text="MAYORISTA"
                     android:fontFamily="@font/montserrat_semibold"
                     android:textColor="@color/white"
                     android:textSize="18dp"
@@ -88,20 +88,12 @@
                 android:orientation="horizontal"
 
                 >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="FUERZA DE VENTA:"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:textColor="@color/white"
-                    android:textSize="18dp"
-                    android:textAlignment="center"
-                    />
+
                 <TextView
                     android:id="@+id/tv_fuerza_venta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="BODEG4"
+                    android:text="DAAL’S INVERSIONES SAC"
                     android:fontFamily="@font/montserrat_semibold"
                     android:textColor="@color/white"
                     android:textSize="18dp"
@@ -306,14 +298,45 @@
                 android:layout_height="wrap_content"
                 android:gravity="top|center"
                 android:orientation="horizontal"
-                android:paddingTop="50dp"
+                android:padding="2dp"
+                android:layout_margin="4dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="GANA LLAVE: "
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:textAlignment="center"
+                    />
+                <TextView
+                    android:id="@+id/tv_llave"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    android:textAlignment="center"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|center"
+                android:orientation="horizontal"
+                android:background="@color/blue_200"
+                android:padding="2dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ACTUALIZADO AL: "
                     android:fontFamily="@font/montserrat_bold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="16dp"
                     android:textAlignment="center"
                     />
@@ -323,7 +346,7 @@
                     android:layout_height="wrap_content"
                     android:text="d-mm-yyyy"
                     android:fontFamily="@font/montserrat_semibold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="16dp"
                     android:textAlignment="center"
                     />
