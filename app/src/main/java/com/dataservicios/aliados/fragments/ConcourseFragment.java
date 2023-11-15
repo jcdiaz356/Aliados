@@ -21,6 +21,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dataservicios.aliados.repo.CategoryRepo;
+import com.dataservicios.aliados.repo.ProgramRepo;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.ornach.nobobutton.ViewButton;
@@ -46,9 +48,9 @@ import retrofit2.Response;
 public class ConcourseFragment extends Fragment {
     private static final String LOG_TAG = ConcourseFragment.class.getSimpleName();
 
-   // private ViewButton btn_0;
-   private Activity activity;
-    private TextView tv_fecha_inicio,tv_fecha_fin,tv_description;
+    // private ViewButton btn_0;
+    private Activity activity;
+    private TextView tv_fecha_inicio, tv_fecha_fin, tv_description;
 
     private Fragment fragment;
     private LinearLayout ly_container;
@@ -56,6 +58,8 @@ public class ConcourseFragment extends Fragment {
     private Dialog dialog;
 
     private DatabaseHelper helper;
+    private CategoryRepo categoryRepo;
+    private ProgramRepo programRepo;
 
     public ConcourseFragment(Client user) {
         // Required empty public constructor
@@ -70,38 +74,43 @@ public class ConcourseFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_concourse, container, false);
         DatabaseManager.init(getContext());
-        helper = DatabaseManager.getInstance().getHelper();
+
+        categoryRepo    = new CategoryRepo(getContext());
+        programRepo     = new ProgramRepo(getContext());
+
+        tv_fecha_inicio = rootView.findViewById(R.id.tv_fecha_inicio);
+        tv_fecha_fin = rootView.findViewById(R.id.tv_fecha_fin);
+        tv_description = rootView.findViewById(R.id.tv_description);
+
 
 
 
 //        ly_container = (LinearLayout) rootView.findViewById(R.id.ly_container);
 //        ly_container.removeAllViews();
 
-
-
         return rootView;
     }
 
 
-    private void getDataConcourse(){
+    private void getDataConcourse() {
 
-        dialog  = new Dialog(getContext());
+        dialog = new Dialog(getContext());
 
         showProgressDialog();
 
-        ArrayList<Concourse> concourses  = new ArrayList<Concourse>();
+        ArrayList<Concourse> concourses = new ArrayList<Concourse>();
         Concourse concourse = new Concourse();
 
         Map<String, String> map = new HashMap<String, String>();
         /*map.put("id", user.getId_data());*/
-     //   map.put("month", month.getMonth_number());
-       // map.put("month", "04");
-    //    map.put("year", String.valueOf(month.getYear_number()));
+        //   map.put("month", month.getMonth_number());
+        // map.put("month", "04");
+        //    map.put("year", String.valueOf(month.getYear_number()));
 
         RestApiAdapter restApiAdapter = new RestApiAdapter();
-        Service service =  restApiAdapter.getClientService(getContext());
+        Service service = restApiAdapter.getClientService(getContext());
 //        Call<JsonObject> call =  service.getConcoursesForSeller(map);
-        Call<JsonObject> call =  service.getAllConcoursesForSeller(map);
+        Call<JsonObject> call = service.getAllConcoursesForSeller(map);
 
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -110,21 +119,21 @@ public class ConcourseFragment extends Fragment {
                 try {
 
                     JsonObject resultJson;
-                    if(response.isSuccessful()){
-                        Log.d(LOG_TAG,response.body().toString());
+                    if (response.isSuccessful()) {
+                        Log.d(LOG_TAG, response.body().toString());
                         resultJson = response.body();
                         Boolean status = resultJson.get("success").getAsBoolean();
-                        if(status){
+                        if (status) {
 
                             JsonArray dataConcourses = resultJson.getAsJsonArray("concourses");
 
                             for (int i = 0; i < dataConcourses.size(); i++) {
-                                JsonObject dataConcourse =  dataConcourses.get(i).getAsJsonObject();
+                                JsonObject dataConcourse = dataConcourses.get(i).getAsJsonObject();
 
                                 // Cargando Datos en tabla
 
                                 View layout = LayoutInflater.from(getContext()).inflate(R.layout.layout_buttons_councurse_dynamic, null, false);
-                                TextView txt_concurse =  layout.findViewById(R.id.tv_0);
+                                TextView txt_concurse = layout.findViewById(R.id.tv_0);
                                 txt_concurse.setText(dataConcourse.get("fullname").getAsString());
 
                                 ViewButton btn_0 = layout.findViewById(R.id.btn_0);
@@ -133,10 +142,10 @@ public class ConcourseFragment extends Fragment {
                                     @Override
                                     public void onClick(View view) {
 
-                                        Toast.makeText(getContext(), dataConcourse.get("fullname").getAsString(),Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getContext(), dataConcourse.get("fullname").getAsString(), Toast.LENGTH_SHORT).show();
 
                                         //fragment = new ConcourseDetailFragment(user,month,dataConcourse.get("_id").getAsString());
-                                        fragment = new ConcourseDetailFragment(user,dataConcourse.get("_id").getAsString(),dataConcourse.get("concurse_detail_id").getAsInt());
+                                        fragment = new ConcourseDetailFragment(user, dataConcourse.get("_id").getAsString(), dataConcourse.get("concurse_detail_id").getAsInt());
                                         //getSupportFragmentManager().beginTransaction().remove(fragment).commit();
                                         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment)
                                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -157,9 +166,9 @@ public class ConcourseFragment extends Fragment {
 
                         dialog.dismiss();
 
-                    }else {
+                    } else {
                         try {
-                            Log.d(LOG_TAG,"Error no se pudo obtener información: " + response.errorBody().string());
+                            Log.d(LOG_TAG, "Error no se pudo obtener información: " + response.errorBody().string());
                             // processInteractor.showErrorServer("Error: intetelo nuevamente");
                             Toast.makeText(activity, "No se pudo obtener información", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
@@ -193,7 +202,7 @@ public class ConcourseFragment extends Fragment {
         });
     }
 
-    private void showProgressDialog(){
+    private void showProgressDialog() {
         int llPadding = 50;
         LinearLayout ll = new LinearLayout(getContext());
         ll.setOrientation(LinearLayout.HORIZONTAL);
@@ -216,7 +225,7 @@ public class ConcourseFragment extends Fragment {
         ll.addView(progressBar);
         ll.addView(tvText);
         dialog.setCancelable(false);
-        dialog.addContentView(ll,new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        dialog.addContentView(ll, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         dialog.show();
 
     }

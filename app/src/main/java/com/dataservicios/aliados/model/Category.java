@@ -3,23 +3,15 @@ package com.dataservicios.aliados.model;
 import com.j256.ormlite.field.DatabaseField;
 
 public class Category {
-    /*"category": {
-        "id": 4,
-                "fullname": "1001001 - Pastas",
-                "fullname_group": "PASTAS",
-                "description": "Alianza,Don Vittorio, Lavaggi y Nocilini",
-                "created_at": "2023-11-12T18:42:21.000000Z",
-                "updated_at": null
-    }*/
     @DatabaseField(id = true)
     private int id;
-
+    @DatabaseField
     private String fullname;
-
+    @DatabaseField
     private String fullname_group;
-
+    @DatabaseField
     private String description;
-
+    @DatabaseField
     private String created_at;
 
     public int getId() {

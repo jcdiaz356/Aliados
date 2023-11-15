@@ -206,9 +206,7 @@
                             android:textAlignment="center"
                             android:fontFamily="@font/montserrat_bold"
                             android:textSize="16dp"
-                            android:text="Para vendedores: por cada pdv coberturado con 1 tira o 1 frasco, 1 puntos. Por cada pdv
-coberturado con un ticket de S/ 22 o más, 3 puntos. Para sup, jjvv: por llegar al objetivo de
-cobertura, 200 puntos" />
+                            android:text="" />
                     </TableRow>
 
                 </TableLayout>
