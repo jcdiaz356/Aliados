@@ -30,7 +30,8 @@
                 android:text="ESTADO DE CUENTA"
                 android:fontFamily="@font/montserrat_black"
                 android:textColor="@color/white"
-                android:textSize="12pt"
+                android:textSize="24dp"
+                android:textAlignment="center"
                 android:paddingBottom="10dp"
                 />
 
@@ -73,6 +74,7 @@
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:id="@+id/spn_month"
+                    android:visibility="gone"
                     />
             </LinearLayout>
             <LinearLayout
@@ -102,7 +104,7 @@
                             android:text="SOLES GANADOS"
                             android:fontFamily="@font/montserrat_black"
                             android:textColor="@color/white"
-                            android:textSize="7.0pt"
+                            android:textSize="18dp"
                             android:paddingBottom="5dp"
                             />
                         <TextView
@@ -112,7 +114,7 @@
                             android:text="S/. 0"
                             android:fontFamily="@font/montserrat_black"
                             android:textColor="@color/white"
-                            android:textSize="16pt"
+                            android:textSize="30dp"
 
                             />
 

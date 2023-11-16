@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Aliados</string>
-    <string name="text_username">CÓDIGO DE TERRITORIO</string>
+    <string name="text_username">CÓDIGO DE CLIENTE</string>
     <string name="text_login">INICIAR SESIÓN</string>
     <string name="home">Inicio</string>
     <string name="status_accout">Estado de cuenta</string>
