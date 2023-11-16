@@ -20,6 +20,10 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dataservicios.aliados.model.AwardDetail;
+import com.dataservicios.aliados.model.Program;
+import com.dataservicios.aliados.repo.AwardDetailRepo;
+import com.dataservicios.aliados.repo.ProgramRepo;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.dataservicios.aliados.R;
@@ -31,8 +35,11 @@ import com.dataservicios.aliados.servicesApi.Service;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -48,7 +55,8 @@ public class StatusAccountFragment extends Fragment {
     private TextView tv_soles_ganados;
     private TableLayout tbl_concurse;
     private DatabaseHelper helper;
-
+    private AwardDetailRepo awardDetailRepo;
+    private ProgramRepo programRepo;
 
   //  private Month month;
     private Client user;
@@ -66,11 +74,17 @@ public class StatusAccountFragment extends Fragment {
         DatabaseManager.init(getContext());
         helper = DatabaseManager.getInstance().getHelper();
 
+        awardDetailRepo = new AwardDetailRepo(getContext());
+
         spn_month           = (Spinner) rootView.findViewById(R.id.spn_month);
         tv_soles_ganados    = (TextView) rootView.findViewById(R.id.tv_soles_ganados);
         tbl_concurse = (TableLayout) rootView.findViewById(R.id.tbl_concurse);
+        programRepo = new ProgramRepo(getContext());
 
 
+        this.getDataAwardDetails();
+
+        /*this.showAwardDetails(ValuesAwardDetail);*/
 //        ArrayList<Month> months = null;
 //        try {
 //           // months = (ArrayList<Month>) helper.getMonthDao().queryForAll();
@@ -81,23 +95,17 @@ public class StatusAccountFragment extends Fragment {
 //            e.printStackTrace();
 //        }
 
+        ArrayList<Program> programs = (ArrayList<Program>) programRepo.findAll();
+        showLoadPrograms(programs);
+
         spn_month.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //String label = parent.getItemAtPosition(position).toString();
-//                int mount_id = ((Month) spn_month.getSelectedItem()).getId () ;
-//                String label = ((Month) spn_month.getSelectedItem () ).getMount () ;
-//                Toast.makeText(getContext(), label + String.valueOf(mount_id) , Toast.LENGTH_SHORT).show();
-//
-//                try {
-//                    month =  helper.getMonthDao().queryForId(mount_id);
-//                    getData();
-//
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(getActivity(), "No se pudo encontrar datos", Toast.LENGTH_LONG).show();
-//                    return;
-//                }
+                int program_id = ((Program) spn_month.getSelectedItem()).getId () ;
+                String label = ((Program) spn_month.getSelectedItem()).getMonth() ;
+                //
+                programRepo.findById(program_id);
+                Toast.makeText(getContext(), label + String.valueOf(program_id) , Toast.LENGTH_SHORT).show();
 
             }
             @Override
@@ -124,6 +132,42 @@ public class StatusAccountFragment extends Fragment {
 //        spn_month.setAdapter(adapter);
 //    }
 
+    /*private void showAwardDetails(ArrayList<AwardDetail> awarddetails) {
+        ArrayAdapter<AwardDetail>    adapter             = new ArrayAdapter<AwardDetail>(this.getContext(),R.layout.simple_spinner_item, awarddetails);
+       spn_month.setAdapter(adapter);
+   }*/
+
+    private void getDataAwardDetails(){
+        ArrayList<AwardDetail> ValuesAwardDetail = (ArrayList<AwardDetail>) awardDetailRepo.findAll();
+        tbl_concurse.removeAllViews();
+        for (AwardDetail awardDetail: ValuesAwardDetail) {
+            /*Log.d(LOG_TAG, "id: " + awardDetail.getId() + " fullname: " + awardDetail.getFullname() + " ganados: " + awardDetail.getGanados());*/
+            String CategoryName = awardDetail.getCategory().getFullname();
+
+            NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
+            // Aplica el formato al número
+            String MontoSoles = numberFormat.format(awardDetail.getRealv());
+
+            String ganados = numberFormat.format(awardDetail.getReal_total());
+            tv_soles_ganados.setText(ganados);
+
+            /*String MontoSoles = String.valueOf(awardDetail.getRealv());*/
+
+            View row_table = LayoutInflater.from(getContext()).inflate(R.layout.row_table_concourse, null, false);
+            TextView textView0 = row_table.findViewById(R.id.textView0);
+            TextView textView1 = row_table.findViewById(R.id.textView1);
+            textView0.setText( CategoryName);
+            textView1.setText("S/. " + MontoSoles);
+
+            tbl_concurse.addView(row_table);
+        }
+    }
+
+    private void showLoadPrograms(ArrayList<Program> programs) {
+        // this.months      = months;
+        ArrayAdapter<Program>    adapter             = new ArrayAdapter<Program>(this.getContext(),R.layout.simple_spinner_item, programs);
+        spn_month.setAdapter(adapter);
+    }
 
     private void getData(){
 

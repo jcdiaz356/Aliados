@@ -31,7 +31,16 @@ public class Program {
     @DatabaseField
     private String created_at;
 
-    @ForeignCollectionField(eager = false)
+    private ArrayList<Category> categories;
+
+    public ArrayList<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(ArrayList<Category> categories) {
+        this.categories = categories;
+    }
+    /*@ForeignCollectionField(eager = false)
     ForeignCollection<Category> categories;
 
     public ForeignCollection<Category> getCategories() {
@@ -40,7 +49,7 @@ public class Program {
 
     public void setCategories(ForeignCollection<Category> categories) {
         this.categories = categories;
-    }
+    }*/
 
 
     public int getId() {

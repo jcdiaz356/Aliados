@@ -191,10 +191,13 @@ public class LoginActivity extends AppCompatActivity {
 
                                     awardDetailRepo.deleteAll();
                                     JsonArray awardDetails = clientJsonObject.getAsJsonArray("award_details");
-                                    AwardDetail newAwardDetail = new Gson().fromJson(awardDetails, AwardDetail.class);
+                                    AwardDetail[] newAwardDetail = new Gson().fromJson(awardDetails, AwardDetail[].class);
 
-                                    awardDetailRepo.create(newAwardDetail);
+                                    for (AwardDetail object : newAwardDetail) {
+                                        awardDetailRepo.create(object);
+                                    }
 
+                                    List<AwardDetail> ValuesAwardDetail = (List<AwardDetail>) awardDetailRepo.findAll();
 
                                     // **********************************
                                     // Creando el objeto mounth
