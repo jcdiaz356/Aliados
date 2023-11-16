@@ -60,7 +60,7 @@ public class ConcourseFragment extends Fragment {
 
     // private ViewButton btn_0;
     private Activity activity;
-    private TextView tv_fecha_inicio, tv_fecha_fin, tv_description;
+    private TextView tv_fecha_inicio, tv_fecha_fin, tv_description,tv_title;
     private TextView tv_premio, tv_punto_potencial, tv_alcance_llave,tv_gana_llave,tv_punto_final,tv_updated_at ;
     private TableLayout tbl_categories;
 
@@ -102,6 +102,7 @@ public class ConcourseFragment extends Fragment {
         tv_gana_llave       = rootView.findViewById(R.id.tv_gana_llave);
         tv_punto_final      = rootView.findViewById(R.id.tv_punto_final);
         tv_updated_at      = rootView.findViewById(R.id.tv_updated_at);
+        tv_title      = rootView.findViewById(R.id.tv_title);
 
         tbl_categories        = (TableLayout) rootView.findViewById(R.id.tbl_categories);
 
@@ -115,11 +116,12 @@ public class ConcourseFragment extends Fragment {
         tv_fecha_fin.setText(program.getDate_end());
         tv_description.setText(program.getDescription());
 
-        tv_premio.setText("0");
-        tv_punto_potencial.setText("0");
+        tv_premio.setText("1 PUNTO POR CADA S/ 177 *Incluye IGV");
+        tv_punto_potencial.setText("5101");
         tv_alcance_llave.setText(String.valueOf(award.getAvance_total()) + " %");
         tv_gana_llave.setText(( award.getKeyv_total() == 1) ? "SI" : "NO");
         tv_punto_final.setText("--");
+        tv_title.setText(program.getFullname());
 
         SimpleDateFormat formatoOriginal = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         try {

@@ -146,10 +146,10 @@ public class StatusAccountFragment extends Fragment {
 
             NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
             // Aplica el formato al número
-            String MontoSoles = numberFormat.format(awardDetail.getRealv());
+            String MontoSoles = numberFormat.format(awardDetail.getPoints());
 
             String ganados = numberFormat.format(awardDetail.getReal_total());
-            tv_soles_ganados.setText(ganados);
+            tv_soles_ganados.setText(String.valueOf(awardDetail.getPoint_total()));
 
             /*String MontoSoles = String.valueOf(awardDetail.getRealv());*/
 
@@ -157,7 +157,7 @@ public class StatusAccountFragment extends Fragment {
             TextView textView0 = row_table.findViewById(R.id.textView0);
             TextView textView1 = row_table.findViewById(R.id.textView1);
             textView0.setText( CategoryName);
-            textView1.setText("S/. " + MontoSoles);
+            textView1.setText( MontoSoles);
 
             tbl_concurse.addView(row_table);
         }

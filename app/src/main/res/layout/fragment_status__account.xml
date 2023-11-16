@@ -41,14 +41,12 @@
                 android:layout_marginTop="4dp"
                 android:background="@color/white" />
 
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top|center"
                 android:orientation="horizontal"
-                android:paddingTop="10dp"
+                android:paddingTop="4dp"
                 />
             <!--        <LinearLayout-->
             <!--            android:layout_width="match_parent"-->
@@ -74,7 +72,6 @@
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp"
                     android:id="@+id/spn_month"
-                    android:visibility="gone"
                     />
             </LinearLayout>
             <LinearLayout
@@ -101,7 +98,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="SOLES GANADOS"
+                            android:text="PUNTOS GANADOS"
                             android:fontFamily="@font/montserrat_black"
                             android:textColor="@color/white"
                             android:textSize="18dp"
@@ -123,6 +120,24 @@
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|center"
+                android:orientation="horizontal"
+
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Puntos acumulados al 05/10s: /.32,210"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    android:textAlignment="center"
+                    />
+
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -152,7 +167,7 @@
                             android:fontFamily="@font/montserrat_bold"
                             android:textSize="14dp"
                             android:layout_gravity="center"
-                            android:text="MINORISTAS" />
+                            android:text="ABARROTES" />
                     </TableRow>
                     <TableRow
                         android:layout_width="match_parent"
@@ -176,7 +191,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="SOLES"
+                            android:text="PUNTOS"
                             android:fontFamily="@font/montserrat_bold"
                             android:textAlignment="center"
                             android:textColor="@color/white" />
