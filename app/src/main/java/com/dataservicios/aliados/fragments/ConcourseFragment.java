@@ -18,9 +18,14 @@ import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dataservicios.aliados.model.Award;
+import com.dataservicios.aliados.model.Category;
+import com.dataservicios.aliados.model.Program;
+import com.dataservicios.aliados.repo.AwardRepo;
 import com.dataservicios.aliados.repo.CategoryRepo;
 import com.dataservicios.aliados.repo.ProgramRepo;
 import com.google.gson.JsonArray;
@@ -36,8 +41,13 @@ import com.dataservicios.aliados.servicesApi.Service;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -51,6 +61,8 @@ public class ConcourseFragment extends Fragment {
     // private ViewButton btn_0;
     private Activity activity;
     private TextView tv_fecha_inicio, tv_fecha_fin, tv_description;
+    private TextView tv_premio, tv_punto_potencial, tv_alcance_llave,tv_gana_llave,tv_punto_final,tv_updated_at ;
+    private TableLayout tbl_categories;
 
     private Fragment fragment;
     private LinearLayout ly_container;
@@ -60,6 +72,7 @@ public class ConcourseFragment extends Fragment {
     private DatabaseHelper helper;
     private CategoryRepo categoryRepo;
     private ProgramRepo programRepo;
+    private AwardRepo awardRepo;
 
     public ConcourseFragment(Client user) {
         // Required empty public constructor
@@ -75,12 +88,70 @@ public class ConcourseFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_concourse, container, false);
         DatabaseManager.init(getContext());
 
-        categoryRepo    = new CategoryRepo(getContext());
-        programRepo     = new ProgramRepo(getContext());
+        categoryRepo        = new CategoryRepo(getContext());
+        programRepo         = new ProgramRepo(getContext());
+        awardRepo           = new AwardRepo(getContext());
 
-        tv_fecha_inicio = rootView.findViewById(R.id.tv_fecha_inicio);
-        tv_fecha_fin = rootView.findViewById(R.id.tv_fecha_fin);
-        tv_description = rootView.findViewById(R.id.tv_description);
+
+        tv_fecha_inicio     = rootView.findViewById(R.id.tv_fecha_inicio);
+        tv_fecha_fin        = rootView.findViewById(R.id.tv_fecha_fin);
+        tv_description      = rootView.findViewById(R.id.tv_description);
+        tv_premio           = rootView.findViewById(R.id.tv_premio);
+        tv_punto_potencial  = rootView.findViewById(R.id.tv_punto_potencial);
+        tv_alcance_llave    = rootView.findViewById(R.id.tv_alcance_llave);
+        tv_gana_llave       = rootView.findViewById(R.id.tv_gana_llave);
+        tv_punto_final      = rootView.findViewById(R.id.tv_punto_final);
+        tv_updated_at      = rootView.findViewById(R.id.tv_updated_at);
+
+        tbl_categories        = (TableLayout) rootView.findViewById(R.id.tbl_categories);
+
+
+
+        Program program             = (Program) programRepo.findFirstReg();
+        List<Category> categories   = (List<Category>) categoryRepo.findAll();
+        Award award                 = (Award) awardRepo.findFirstReg();
+
+        tv_fecha_inicio.setText(program.getDate_start());
+        tv_fecha_fin.setText(program.getDate_end());
+        tv_description.setText(program.getDescription());
+
+        tv_premio.setText("0");
+        tv_punto_potencial.setText("0");
+        tv_alcance_llave.setText(String.valueOf(award.getAvance_total()) + " %");
+        tv_gana_llave.setText(( award.getKeyv_total() == 1) ? "SI" : "NO");
+        tv_punto_final.setText("--");
+
+        SimpleDateFormat formatoOriginal = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        try {
+            // Convierte la cadena a un objeto Date
+            Date miFecha = formatoOriginal.parse(award.getFecha());
+            // Crea un objeto SimpleDateFormat para el formato deseado
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+            // Aplica el formato a la fecha
+            String fechaFormateada = formatoFecha.format(miFecha);
+            // Muestra la fecha formateada en tu TextView
+            tv_updated_at.setText(fechaFormateada);
+        } catch (ParseException e) {
+            // Maneja la excepción en caso de error al analizar la cadena
+            e.printStackTrace();
+            // Puedes mostrar un mensaje de error o realizar alguna otra acción adecuada
+        }
+
+
+        tbl_categories.removeAllViews();
+        for(Category category: categories){
+            View row_table = LayoutInflater.from(getContext()).inflate(R.layout.row_table_categories_general, null, false);
+            TextView textView0 = row_table.findViewById(R.id.tv_title);
+            TextView textView1 = row_table.findViewById(R.id.tv_description);
+            textView0.setText(String.valueOf(category.getFullname()));
+            textView1.setText(category.getDescription());
+
+            tbl_categories.addView(row_table);
+        }
+
+
+
+
 
 
 

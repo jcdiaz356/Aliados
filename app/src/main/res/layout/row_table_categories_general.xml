@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/orange_200"
+            android:textSize="16dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="" />
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:fontFamily="@font/montserrat_bold"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="14dp"
+            android:text="Capri, Cocinero, Cil, Friol y PrimorCapri, Cocinero, Cil, Friol y PrimorCapri, Cocinero, Cil, Friol y Primor" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/black" />
+    </LinearLayout>
+</TableRow>
