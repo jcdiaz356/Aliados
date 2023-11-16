@@ -31,15 +31,25 @@ public class Program {
     @DatabaseField
     private String created_at;
 
+    private ArrayList<Category> categories;
 
-//    @DatabaseField(foreign = true, foreignAutoRefresh = true)
-//    private ArrayList<Category> categories;
-//
-//
-//
-//    public ArrayList<Category> getCategories() {
-//        return categories;
-//    }
+    public ArrayList<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(ArrayList<Category> categories) {
+        this.categories = categories;
+    }
+    /*@ForeignCollectionField(eager = false)
+    ForeignCollection<Category> categories;
+
+    public ForeignCollection<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(ForeignCollection<Category> categories) {
+        this.categories = categories;
+    }*/
 
 
     public int getId() {
@@ -97,6 +107,7 @@ public class Program {
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
     }
+
 
     @Override
     public String toString () {

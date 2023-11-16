@@ -18,8 +18,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dataservicios.aliados.model.Award;
+import com.dataservicios.aliados.model.AwardDetail;
 import com.dataservicios.aliados.model.Category;
 import com.dataservicios.aliados.model.Program;
+import com.dataservicios.aliados.repo.AwardDetailRepo;
 import com.dataservicios.aliados.repo.AwardRepo;
 import com.dataservicios.aliados.repo.CategoryRepo;
 import com.dataservicios.aliados.repo.ClientRepo;
@@ -63,6 +65,8 @@ public class LoginActivity extends AppCompatActivity {
     private AwardRepo awardRepo;
     private CategoryRepo categoryRepo;
 
+    private AwardDetailRepo awardDetailRepo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,10 +76,12 @@ public class LoginActivity extends AppCompatActivity {
         DatabaseManager.init(activity);
         helper = DatabaseManager.getInstance().getHelper();
 
-        clientRepo      = new ClientRepo(activity);
-//        monthRepo     = new MonthRepo(activity);
-        programRepo     = new ProgramRepo(activity);
-        awardRepo       = new AwardRepo(activity);
+        clientRepo = new ClientRepo(activity);
+//        monthRepo = new MonthRepo(activity);
+        programRepo = new ProgramRepo(activity);
+        awardRepo = new AwardRepo(activity);
+        awardDetailRepo = new AwardDetailRepo(activity);
+
         categoryRepo    = new CategoryRepo(activity);
 
 
@@ -90,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                dialog = new Dialog(activity);
+                dialog  = new Dialog(activity);
 
                 showProgressDialog();
                 String code = txt_input_usercode.getEditText().getText().toString().trim();
@@ -100,12 +106,12 @@ public class LoginActivity extends AppCompatActivity {
 //                txt_input_usercode.getEditText().setText(code);
 
                 Map<String, String> map = new HashMap<String, String>();
-                map.put("code", code);
-                map.put("password", password);
+                 map.put("code", code);
+                 map.put("password", password);
 
                 RestApiAdapter restApiAdapter = new RestApiAdapter();
-                Service service = restApiAdapter.getClientService(activity);
-                Call<JsonObject> call = service.getClientForCodeAndPassword(map);
+                Service service =  restApiAdapter.getClientService(activity);
+                Call<JsonObject> call =  service.getClientForCodeAndPassword(map);
 
                 call.enqueue(new Callback<JsonObject>() {
                     @Override
@@ -166,7 +172,6 @@ public class LoginActivity extends AppCompatActivity {
                                         programRepo.create(object);
                                     }
 
-
                                     List<Program> ObjectPrograms = (List<Program>) programRepo.findAll();
 
                                     // **********************************
@@ -180,6 +185,19 @@ public class LoginActivity extends AppCompatActivity {
 
                                     awardRepo.create(newAward);
 
+                                    // **********************************
+                                    // Creando el array de objeto AwardDetail
+                                    // *********************************
+
+                                    awardDetailRepo.deleteAll();
+                                    JsonArray awardDetails = clientJsonObject.getAsJsonArray("award_details");
+                                    AwardDetail[] newAwardDetail = new Gson().fromJson(awardDetails, AwardDetail[].class);
+
+                                    for (AwardDetail object : newAwardDetail) {
+                                        awardDetailRepo.create(object);
+                                    }
+
+                                    List<AwardDetail> ValuesAwardDetail = (List<AwardDetail>) awardDetailRepo.findAll();
 
                                     // **********************************
                                     // Creando el objeto mounth
@@ -220,9 +238,9 @@ public class LoginActivity extends AppCompatActivity {
 
                                 dialog.dismiss();
 
-                            } else {
+                            }else {
                                 try {
-                                    Log.d(LOG_TAG, "Error credenciales: " + response.errorBody().string());
+                                    Log.d(LOG_TAG,"Error credenciales: " + response.errorBody().string());
                                     // processInteractor.showErrorServer("Error: intetelo nuevamente");
                                     Toast.makeText(activity, "No se pudo obtener información", Toast.LENGTH_SHORT).show();
                                     dialog.dismiss();
@@ -257,7 +275,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void showProgressDialog() {
+    private void showProgressDialog(){
         int llPadding = 50;
         LinearLayout ll = new LinearLayout(activity);
         ll.setOrientation(LinearLayout.HORIZONTAL);
@@ -280,7 +298,7 @@ public class LoginActivity extends AppCompatActivity {
         ll.addView(progressBar);
         ll.addView(tvText);
         dialog.setCancelable(false);
-        dialog.addContentView(ll, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        dialog.addContentView(ll,new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         dialog.show();
 
     }
