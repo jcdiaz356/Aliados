@@ -11,4 +11,6 @@
     <color name="blue_500">#192D36</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="plomo_100">#D6D6D6</color>
+    <color name="plomo_500">#646464</color>
 </resources>

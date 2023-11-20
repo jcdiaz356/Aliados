@@ -1,4 +1,4 @@
-package com.dataservicios.aliados;
+package com.dataservicios.aliados.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,7 @@ import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.dataservicios.aliados.R;
 import com.dataservicios.aliados.db.DatabaseHelper;
 import com.dataservicios.aliados.db.DatabaseManager;
 import com.dataservicios.aliados.model.Client;
@@ -34,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         DatabaseManager.init(activity);
-        helper = DatabaseManager.getInstance().getHelper();
 
         userRepo = new ClientRepo(activity);
 

@@ -4,18 +4,15 @@ import android.content.Context;
 
 import com.dataservicios.aliados.db.DatabaseHelper;
 import com.dataservicios.aliados.db.DatabaseManager;
-import com.dataservicios.aliados.model.Client;
+import com.dataservicios.aliados.model.CategoryAwardDetail;
 
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Created by jcdia on 21/03/2017.
- */
-public class ClientRepo implements Crud {
+public class CategoryAwardDetailRepo implements Crud {
     private DatabaseHelper helper;
 
-    public ClientRepo(Context context) {
+    public CategoryAwardDetailRepo(Context context) {
 
         DatabaseManager.init(context);
         helper = DatabaseManager.getInstance().getHelper();
@@ -24,9 +21,9 @@ public class ClientRepo implements Crud {
     @Override
     public int create(Object item) {
         int index = -1;
-        Client object = (Client) item;
+        CategoryAwardDetail object = (CategoryAwardDetail) item;
         try {
-            index = helper.getClientDao().create(object);
+            index = helper.getCategoryAwardDetailDao().create(object);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -39,10 +36,10 @@ public class ClientRepo implements Crud {
 
         int index = -1;
 
-        Client object = (Client) item;
+        CategoryAwardDetail object = (CategoryAwardDetail) item;
 
         try {
-            helper.getClientDao().update(object);
+            helper.getCategoryAwardDetailDao().update(object);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -56,10 +53,10 @@ public class ClientRepo implements Crud {
 
         int index = -1;
 
-        Client object = (Client) item;
+        CategoryAwardDetail object = (CategoryAwardDetail) item;
 
         try {
-            helper.getClientDao().delete(object);
+            helper.getCategoryAwardDetailDao().delete(object);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,13 +68,14 @@ public class ClientRepo implements Crud {
     @Override
     public int deleteAll() {
 
-        List<Client> items = null;
+        List<CategoryAwardDetail> items = null;
         int counter = 0;
         try {
-            items = helper.getClientDao().queryForAll();
-            for (Client object : items) {
+            items = helper.getCategoryAwardDetailDao().queryForAll();
+
+            for (CategoryAwardDetail object : items) {
                 // do something with object
-                helper.getClientDao().deleteById(object.getId());
+                helper.getCategoryAwardDetailDao().deleteById(object.getId());
                 counter ++ ;
             }
 
@@ -87,12 +85,13 @@ public class ClientRepo implements Crud {
         return counter;
     }
 
+
     @Override
     public Object findById(int id) {
 
-        Client wishList = null;
+        CategoryAwardDetail wishList = null;
         try {
-            wishList = helper.getClientDao().queryForId(id);
+            wishList = helper.getCategoryAwardDetailDao().queryForId(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -103,10 +102,10 @@ public class ClientRepo implements Crud {
     @Override
     public List<?> findAll() {
 
-        List<Client> items = null;
+        List<CategoryAwardDetail> items = null;
 
         try {
-            items = helper.getClientDao().queryForAll();
+            items = helper.getCategoryAwardDetailDao().queryForAll();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -120,7 +119,7 @@ public class ClientRepo implements Crud {
 
         Object wishList = null;
         try {
-            wishList = helper.getClientDao().queryBuilder().queryForFirst();
+            wishList = helper.getCategoryAwardDetailDao().queryBuilder().queryForFirst();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -131,11 +130,10 @@ public class ClientRepo implements Crud {
     public long countReg() {
         long count = 0;
         try {
-            count = helper.getClientDao().countOf();
+            count = helper.getCategoryAwardDetailDao().countOf();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return count;
     }
-
 }

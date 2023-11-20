@@ -22,19 +22,15 @@
             android:paddingRight="@dimen/border_container"
             android:paddingBottom="@dimen/border_container">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:background="@color/white" />
             <TextView
                 android:id="@+id/tv_concurso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" "
+                android:text="ALIADOS"
                 android:fontFamily="@font/montserrat_black"
                 android:textColor="@color/white"
-                android:textSize="12pt"
+                android:textAlignment="center"
+                android:textSize="25dp"
                 android:paddingBottom="10dp"
                 />
             <View
@@ -50,473 +46,211 @@
 
                 >
                 <TextView
+
+                    android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="FUERZA DE VENTA:"
                     android:fontFamily="@font/montserrat_bold"
                     android:textColor="@color/white"
-                    android:textSize="7.6pt"
+                    android:textSize="20dp"
                     android:textAlignment="center"
                     />
-                <TextView
-                    android:id="@+id/tv_fuerza_venta"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:fontFamily="@font/montserrat_bold"
-                    android:textColor="@color/white"
-                    android:textSize="7.6pt"
-                    android:textAlignment="center"
-                    />
+
             </LinearLayout>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top|center"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:paddingTop="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="TIPO:"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:textColor="@color/white"
-                    android:textSize="7.6pt"
-                    android:textAlignment="center"
-                    />
-                <TextView
-                    android:id="@+id/tv_tipo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:textColor="@color/white"
-                    android:textSize="7.6pt"
-                    android:textAlignment="center"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="top|center"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
-                android:paddingRight="10dp"
-                android:orientation="horizontal">
-
-                <TableLayout
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingRight="1dp"
-                    >
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/red_700"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:text="OBJETIVO COBERTURA"
-                            android:textColor="@color/white" />
-                    </TableRow>
-
-                    <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp">
-
-                        <TextView
-                            android:id="@+id/tv_objetivo_cobertura"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:text="0"
-                            android:textAlignment="center"
-                            android:textSize="16dp" />
-
-
-
-                    </TableRow>
-                </TableLayout>
-
-                <TableLayout
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="1dp">
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/red_700"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:text="AVANCE COBERTURA"
-                            android:textColor="@color/white" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp">
-                        <TextView
-                            android:id="@+id/tv_avance_cobertura"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:text="18"
-                            android:textAlignment="center"
-                            android:textSize="16dp" />
-                    </TableRow>
-                </TableLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="top|center"
-                android:orientation="vertical"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
-                android:paddingRight="10dp">
                 <!--        TABLA DE CONTENIDOOOO-->
-
                 <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/red_700"
+                        android:background="@color/brown_500"
                         android:gravity="center"
-                        android:orientation="vertical"
                         android:paddingTop="10dp"
-                        android:paddingBottom="10dp">
+                        android:paddingBottom="10dp"
+                        android:orientation="vertical">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textSize="14dp"
                             android:layout_gravity="center"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:text="% AVANCE COBERTURA"
-                            android:textColor="@color/white" />
+                            android:text="CATEGORIAS" />
                     </TableRow>
-
-                    <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp">
-                        <TextView
-                            android:id="@+id/tv_avance_cobertura_percent"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:text="100%"
-                            android:textAlignment="center"
-                            android:textSize="16dp" />
-                    </TableRow>
-
                 </TableLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="top|center"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
-                android:paddingRight="10dp"
-                android:orientation="horizontal">
-
-                <TableLayout
-                    android:layout_weight="1"
+                <LinearLayout
+                    android:id="@+id/ly_categories_indicator"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingRight="1dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="top|center"
+                    android:orientation="vertical"
                     >
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/red_700"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:text="OBJETIVO VOLUMEN"
-                            android:textColor="@color/white" />
-                    </TableRow>
-
-                    <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp">
-
-                        <TextView
-                            android:id="@+id/tv_objetivo_volumen"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:text="0.05"
-                            android:textAlignment="center"
-                            android:textSize="16dp" />
-
-
-
-                    </TableRow>
-                </TableLayout>
-
-                <TableLayout
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="1dp">
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/red_700"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:text="AVANCE VOLUMEN"
-                            android:textColor="@color/white" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp">
-                        <TextView
-                            android:id="@+id/tv_avance_volumen"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:text="0.01"
-                            android:textAlignment="center"
-                            android:textSize="16dp" />
-                    </TableRow>
-                </TableLayout>
-
+                </LinearLayout>
             </LinearLayout>
+
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top|center"
-                android:orientation="vertical"
-                android:paddingLeft="10dp"
                 android:paddingTop="10dp"
-                android:paddingRight="10dp">
-
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/red_700"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp">
-
-                        <TextView
-
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:text="% AVANCE VOLUMEN"
-                            android:textColor="@color/white" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp">
-
-                        <TextView
-                            android:id="@+id/tv_avance_volumen_percent"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:text=""
-                            android:textAlignment="center"
-                            android:textSize="16dp" />
-
-
-                    </TableRow>
-                </TableLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="top|center"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
-                android:paddingRight="10dp"
                 android:orientation="horizontal">
 
-                <TableLayout
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingRight="1dp"
-                    >
-
-                    <TableRow
-                        android:layout_width="match_parent"
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" >
+                    <LinearLayout
+                        android:layout_width="160dp"
                         android:layout_height="wrap_content"
-                        android:background="@color/red_700"
                         android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp">
+                        android:padding="10dp"
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:text="PUNTOS"
-                            android:textColor="@color/white" />
-                    </TableRow>
-
-                    <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp">
+                            android:fontFamily="@font/montserrat_regular"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            android:text="PUNTOS POTENCIALES" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@color/black" />
 
                         <TextView
-                            android:id="@+id/tv_puntos"
-                            android:layout_width="0dp"
+                            android:id="@+id/tv_punto_potencial"
+                            android:layout_width="160dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:fontFamily="@font/montserrat_bold"
-                            android:text="0"
+                            android:text="0 %"
                             android:textAlignment="center"
-                            android:textSize="16dp" />
-
-
-
-                    </TableRow>
-                </TableLayout>
-
-                <TableLayout
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="1dp">
-
-                    <TableRow
-                        android:layout_width="match_parent"
+                            android:textColor="@color/black"
+                            android:textSize="25dp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="160dp"
                         android:layout_height="wrap_content"
-                        android:background="@color/red_700"
+                        android:padding="10dp"
                         android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="10dp"
-                        android:paddingBottom="10dp">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:text="SOLES"
-                            android:textColor="@color/white" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp">
+                            android:fontFamily="@font/montserrat_regular"
+                            android:textColor="@color/black"
+                            android:textSize="10dp"
+                            android:text="% ALCANCE LLAVE" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@color/black" />
                         <TextView
-                            android:id="@+id/tv_soles"
-                            android:layout_width="0dp"
+                            android:id="@+id/tv_alcance_llave"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:text="0 %"
                             android:fontFamily="@font/montserrat_bold"
-                            android:text="S/. 0"
+                            android:textColor="@color/black"
+                            android:textSize="25dp"
                             android:textAlignment="center"
-                            android:textSize="16dp" />
-                    </TableRow>
-                </TableLayout>
+                            />
+                    </LinearLayout>
 
+                </TableRow>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top|center"
+                android:paddingTop="10dp"
+                android:orientation="horizontal">
+
+                <TableRow
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" >
+                    <LinearLayout
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:textColor="@color/black"
+                            android:textSize="12dp"
+                            android:text="GANA LLAVE" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@color/black" />
+
+                        <TextView
+                            android:id="@+id/tv_gana_llave"
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="0 %"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="25dp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:textColor="@color/black"
+                            android:textSize="12dp"
+                            android:text="PUNTOS FINALES" />
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@color/black" />
+                        <TextView
+                            android:id="@+id/tv_punto_final"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0 %"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/black"
+                            android:textSize="25dp"
+                            android:textAlignment="center"
+                            />
+                    </LinearLayout>
+
+                </TableRow>
             </LinearLayout>
 
             <LinearLayout
@@ -524,14 +258,17 @@
                 android:layout_height="wrap_content"
                 android:gravity="top|center"
                 android:orientation="horizontal"
-                android:paddingTop="50dp"
+                android:background="@color/blue_200"
+                android:padding="2dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="ACTUALIZADO AL: "
                     android:fontFamily="@font/montserrat_bold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="16dp"
                     android:textAlignment="center"
                     />
@@ -541,7 +278,7 @@
                     android:layout_height="wrap_content"
                     android:text="d-mm-yyyy"
                     android:fontFamily="@font/montserrat_semibold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="16dp"
                     android:textAlignment="center"
                     />

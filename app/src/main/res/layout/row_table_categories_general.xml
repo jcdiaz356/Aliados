@@ -29,7 +29,7 @@
             android:fontFamily="@font/montserrat_bold"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:textSize="12dp"
+            android:textSize="11dp"
             android:text="" />
         <View
             android:layout_width="match_parent"

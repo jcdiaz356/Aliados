@@ -10,7 +10,10 @@ import android.util.Log;
 import com.dataservicios.aliados.model.Award;
 import com.dataservicios.aliados.model.Category;
 import com.dataservicios.aliados.model.AwardDetail;
+import com.dataservicios.aliados.model.CategoryAwardDetail;
 import com.dataservicios.aliados.model.Client;
+import com.dataservicios.aliados.model.ClientType;
+import com.dataservicios.aliados.model.ClientTypeCategory;
 import com.dataservicios.aliados.model.Program;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
@@ -35,12 +38,14 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 	// the DAO object we use to access the SimpleData table
     //pressure
 
-	private Dao<Client, Integer> ClientDao                      = null;
-    private Dao<Program, Integer> ProgramDao                      = null;
-    private Dao<Award, Integer> AwardDao                      = null;
-    private Dao<Category, Integer> CategoryDao                      = null;
-
-    private Dao<AwardDetail, Integer> AwardDetailDao                      = null;
+	private Dao<Client, Integer> ClientDao                                  = null;
+    private Dao<Program, Integer> ProgramDao                                = null;
+    private Dao<Award, Integer> AwardDao                                    = null;
+    private Dao<Category, Integer> CategoryDao                              = null;
+    private Dao<AwardDetail, Integer> AwardDetailDao                        = null;
+    private Dao<CategoryAwardDetail, Integer> CategoryAwardDetailDao        = null;
+    private Dao<ClientType, Integer> ClientTypeDao                          = null;
+    private Dao<ClientTypeCategory, Integer> ClientTypeCategoryDao          = null;
 
 
 	public DatabaseHelper(Context context) {
@@ -58,6 +63,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Award.class                     );
             TableUtils.createTable(connectionSource, AwardDetail.class                     );
             TableUtils.createTable(connectionSource, Category.class                     );
+            TableUtils.createTable(connectionSource, CategoryAwardDetail.class                     );
+            TableUtils.createTable(connectionSource, ClientType.class                     );
+            TableUtils.createTable(connectionSource, ClientTypeCategory.class                     );
 
 
 
@@ -91,10 +99,13 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
 
             TableUtils.dropTable(connectionSource, Client.class,true              );
-            TableUtils.createTable(connectionSource, Program.class                     );
-            TableUtils.createTable(connectionSource, Award.class                     );
-            TableUtils.createTable(connectionSource, AwardDetail.class                     );
-            TableUtils.createTable(connectionSource, Category.class                     );
+            TableUtils.dropTable(connectionSource, Program.class,true                  );
+            TableUtils.dropTable(connectionSource, Award.class ,true                    );
+            TableUtils.dropTable(connectionSource, AwardDetail.class    ,true                 );
+            TableUtils.dropTable(connectionSource, Category.class     ,true                );
+            TableUtils.dropTable(connectionSource, CategoryAwardDetail.class,true                     );
+            TableUtils.dropTable(connectionSource, ClientType.class,true                     );
+            TableUtils.dropTable(connectionSource, ClientTypeCategory.class,true                     );
 
 
             onCreate(db,connectionSource);
@@ -164,6 +175,36 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             }
         }
         return CategoryDao;
+    }
+    public Dao<CategoryAwardDetail, Integer> getCategoryAwardDetailDao() {
+        if (null == CategoryAwardDetailDao) {
+            try {
+                CategoryAwardDetailDao = getDao(CategoryAwardDetail.class);
+            }catch (java.sql.SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return CategoryAwardDetailDao;
+    }
+    public Dao<ClientType, Integer> getClientTypeDao() {
+        if (null == ClientTypeDao) {
+            try {
+                ClientTypeDao = getDao(ClientType.class);
+            }catch (java.sql.SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return ClientTypeDao;
+    }
+    public Dao<ClientTypeCategory, Integer> getClientTypeCategoryDao() {
+        if (null == ClientTypeCategoryDao) {
+            try {
+                ClientTypeCategoryDao = getDao(ClientTypeCategory.class);
+            }catch (java.sql.SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return ClientTypeCategoryDao;
     }
 
 

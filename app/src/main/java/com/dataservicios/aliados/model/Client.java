@@ -16,6 +16,16 @@ public class Client {
    private String oficina;
    @DatabaseField
    private int save_ssesion;
+   @DatabaseField(foreign = true,foreignAutoRefresh = true)
+   private ClientType client_type;
+
+   public ClientType getClient_type() {
+      return client_type;
+   }
+
+   public void setClient_type(ClientType client_type) {
+      this.client_type = client_type;
+   }
 
    public int getId() {
       return id;

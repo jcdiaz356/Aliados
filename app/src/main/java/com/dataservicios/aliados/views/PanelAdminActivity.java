@@ -1,4 +1,4 @@
-package com.dataservicios.aliados;
+package com.dataservicios.aliados.views;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,23 +9,19 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.dataservicios.aliados.R;
 import com.dataservicios.aliados.repo.ClientRepo;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import com.dataservicios.aliados.db.DatabaseManager;
-import com.dataservicios.aliados.fragments.ConcourseFragment;
-import com.dataservicios.aliados.fragments.PromotionsFragment;
-import com.dataservicios.aliados.fragments.StatusAccountFragment;
-import com.dataservicios.aliados.fragments.WelcomeFragment;
+import com.dataservicios.aliados.views.fragments.ConcourseFragment;
+import com.dataservicios.aliados.views.fragments.StatusAccountFragment;
+import com.dataservicios.aliados.views.fragments.WelcomeFragment;
 import com.dataservicios.aliados.model.Client;
-
-import java.sql.SQLException;
-import java.util.List;
 
 public class PanelAdminActivity extends AppCompatActivity {
     private static final String LOG_TAG = PanelAdminActivity.class.getSimpleName();
@@ -51,7 +47,6 @@ public class PanelAdminActivity extends AppCompatActivity {
         client = (Client) clientRepo.findById(client_id);
 
         fragment = new WelcomeFragment(client);
-        //getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         getSupportFragmentManager().beginTransaction().replace(R.id.frame_container, fragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .addToBackStack(null).commit();

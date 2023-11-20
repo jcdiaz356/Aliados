@@ -2,20 +2,16 @@ package com.dataservicios.aliados.servicesApi;
 
 
 import com.google.gson.JsonObject;
-import com.dataservicios.aliados.model.Promotion;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.Path;
 
 public interface Service {
 
@@ -34,18 +30,6 @@ public interface Service {
 
 
     // Obteniendo un promoción
-    @GET("promotions/{id}")
-    Call<Promotion> getDataPromotion(@Path("id") int id);
-
-
-
-    // Obteniendo las promociones
-    @GET("promotions")
-    Call<ArrayList<Promotion>> getDataPromotions();
-
-    // Obteniendo un promoción por zonas
-    @POST("promotionsForZone")
-    Call<Promotion> promotionsForZone(@Body Map<String, String> map);
 
 
     // Obteniendo las promociones

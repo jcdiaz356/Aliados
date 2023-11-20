@@ -15,19 +15,16 @@
         android:theme="@style/Theme.Ganamas"
         tools:targetApi="31">
         <activity
-            android:name=".ChangePasswordActivity"
+            android:name=".views.ChangePasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".PreviewActivity"
+            android:name=".views.PanelAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".PanelAdminActivity"
+            android:name=".views.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".views.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

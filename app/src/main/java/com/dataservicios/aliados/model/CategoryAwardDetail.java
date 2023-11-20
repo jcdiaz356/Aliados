@@ -2,7 +2,7 @@ package com.dataservicios.aliados.model;
 
 import com.j256.ormlite.field.DatabaseField;
 
-public class Category {
+public class CategoryAwardDetail {
     @DatabaseField(id = true)
     private int id;
     @DatabaseField
@@ -13,9 +13,10 @@ public class Category {
     private String description;
     @DatabaseField
     private String created_at;
-
-    @DatabaseField(foreign = true, foreignAutoRefresh = true)
-    private Program program;
+    @DatabaseField
+    private String updated_at;
+    @DatabaseField(foreign = true,foreignAutoRefresh = true)
+    private AwardDetail award_detail;
 
     public int getId() {
         return id;
@@ -55,5 +56,21 @@ public class Category {
 
     public void setCreated_at(String created_at) {
         this.created_at = created_at;
+    }
+
+    public String getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
+    }
+
+    public AwardDetail getAward_detail() {
+        return award_detail;
+    }
+
+    public void setAward_detail(AwardDetail award_detail) {
+        this.award_detail = award_detail;
     }
 }
