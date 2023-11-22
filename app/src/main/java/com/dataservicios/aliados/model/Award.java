@@ -25,7 +25,15 @@ public class Award {
     private int keyv_total;
 
     @DatabaseField
+    private int points;
+    @DatabaseField
+    private int point_total;
+    @DatabaseField
+    private int point_real_total;
+
+    @DatabaseField
     private String created_at;
+
 
     @DatabaseField(foreign = true, foreignAutoRefresh = true)
     private Client client;
@@ -103,5 +111,29 @@ public class Award {
 
     public void setProgram(Program program) {
         this.program = program;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public int getPoint_total() {
+        return point_total;
+    }
+
+    public void setPoint_total(int point_total) {
+        this.point_total = point_total;
+    }
+
+    public int getPoint_real_total() {
+        return point_real_total;
+    }
+
+    public void setPoint_real_total(int point_real_total) {
+        this.point_real_total = point_real_total;
     }
 }

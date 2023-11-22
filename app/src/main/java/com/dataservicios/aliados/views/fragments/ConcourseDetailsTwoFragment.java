@@ -21,6 +21,7 @@ import com.dataservicios.aliados.repo.CategoryAwardDetailRepo;
 import com.dataservicios.aliados.repo.CategoryRepo;
 import com.dataservicios.aliados.repo.ProgramRepo;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -39,6 +40,7 @@ public class ConcourseDetailsTwoFragment extends Fragment {
     private AwardRepo                   awardRepo;
     private CategoryAwardDetailRepo     categoryAwardDetailRepo;
     private LinearLayout ly_categories_indicator;
+    private DecimalFormat formatea = new DecimalFormat("###,###");
 
 
     public ConcourseDetailsTwoFragment(Client client) {
@@ -76,11 +78,11 @@ public class ConcourseDetailsTwoFragment extends Fragment {
 
         ly_categories_indicator     = rootView.findViewById(R.id.ly_categories_indicator);
 
-        tv_punto_potencial.setText("5101");
-        tv_alcance_llave.setText(String.valueOf(award.getAvance_total()) + " %");
+        tv_punto_potencial.setText(String.valueOf(formatea.format(award.getPoint_total())));
+        tv_alcance_llave.setText(String.valueOf(Math.round(award.getAvance_total())) + " %");
         tv_gana_llave.setText(( award.getKeyv_total() == 1) ? "SI" : "NO");
-        tv_punto_final.setText("--");
-        tv_title.setText(program.getFullname());
+        tv_punto_final.setText(String.valueOf(formatea.format(award.getPoint_real_total())));
+        tv_title.setText(client.getClient_type().getFullname());
 
         SimpleDateFormat formatoOriginal = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         try {
@@ -104,24 +106,25 @@ public class ConcourseDetailsTwoFragment extends Fragment {
             View ly_item;
             TextView tv_description;
 
+
             ly_item = LayoutInflater.from(getContext()).inflate(R.layout.list_item, null, false);
             tv_description = ly_item.findViewById(R.id.tv_description);
-            tv_description.setText( "PLAN(PEN) " +  String.valueOf(categoryAwardDetail.getAward_detail().getPlan()));
+            tv_description.setText( "PLAN (PEN): " +  String.valueOf(formatea.format(categoryAwardDetail.getAward_detail().getPlan()))  );
             ly_categories_indicator.addView(ly_item);
 
             ly_item = LayoutInflater.from(getContext()).inflate(R.layout.list_item, null, false);
             tv_description = ly_item.findViewById(R.id.tv_description);
-            tv_description.setText( "REAL(PEN) " +  String.valueOf(categoryAwardDetail.getAward_detail().getRealv()));
+            tv_description.setText( "REAL (PEN): " +  String.valueOf(formatea.format(categoryAwardDetail.getAward_detail().getRealv())));
             ly_categories_indicator.addView(ly_item);
 
             ly_item = LayoutInflater.from(getContext()).inflate(R.layout.list_item, null, false);
             tv_description = ly_item.findViewById(R.id.tv_description);
-            tv_description.setText( "% ALCANCE " +  String.valueOf(categoryAwardDetail.getAward_detail().getAvance()) + " % ");
+            tv_description.setText( "% ALCANCE: " +  String.valueOf(Math.round(categoryAwardDetail.getAward_detail().getAvance())) + " % ");
             ly_categories_indicator.addView(ly_item);
 
             ly_item = LayoutInflater.from(getContext()).inflate(R.layout.list_item, null, false);
             tv_description = ly_item.findViewById(R.id.tv_description);
-            tv_description.setText( "PUNTOS POTENCIALES " +  String.valueOf(categoryAwardDetail.getAward_detail().getPoints()));
+            tv_description.setText( "PUNTOS POTENCIALES: " +  String.valueOf(formatea.format(categoryAwardDetail.getAward_detail().getPoints())));
             ly_categories_indicator.addView(ly_item);
 
 

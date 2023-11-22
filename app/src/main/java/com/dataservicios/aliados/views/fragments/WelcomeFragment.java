@@ -137,7 +137,7 @@ public class WelcomeFragment extends Fragment {
         tv_foods.setText("S/."+realSi);
         String faltante = numberFormat.format(award.getPlan_total()-award.getReal_total());
         tv_home_care.setText("S/."+faltante);
-        tv_porc_gestion.setText(String.valueOf(award.getAvance_total()) + " %" );
+        tv_porc_gestion.setText(String.valueOf(Math.round(award.getAvance_total())) + " %" );
 
         // Crea un objeto SimpleDateFormat para el formato deseado
         SimpleDateFormat formatoOriginal = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());

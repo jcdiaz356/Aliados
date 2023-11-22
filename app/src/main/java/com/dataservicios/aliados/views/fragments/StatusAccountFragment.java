@@ -34,6 +34,7 @@ import com.dataservicios.aliados.servicesApi.RestApiAdapter;
 import com.dataservicios.aliados.servicesApi.Service;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -54,6 +55,7 @@ public class StatusAccountFragment extends Fragment {
     private DatabaseHelper helper;
     private AwardDetailRepo awardDetailRepo;
     private ProgramRepo programRepo;
+    private DecimalFormat formatea = new DecimalFormat("###,###");
 
   //  private Month month;
     private Client user;
@@ -118,10 +120,10 @@ public class StatusAccountFragment extends Fragment {
 
             NumberFormat numberFormat = NumberFormat.getNumberInstance(Locale.getDefault());
             // Aplica el formato al número
-            String MontoSoles = numberFormat.format(awardDetail.getPoints());
+            String MontoSoles = String.valueOf(formatea.format(awardDetail.getPoint_real()));
 
             String ganados = numberFormat.format(awardDetail.getReal_total());
-            tv_soles_ganados.setText(String.valueOf(awardDetail.getPoint_total()));
+            tv_soles_ganados.setText(String.valueOf(formatea.format(awardDetail.getPoint_real_total())));
 
             /*String MontoSoles = String.valueOf(awardDetail.getRealv());*/
 

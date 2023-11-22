@@ -74,8 +74,8 @@ public class ConcourseFragment extends Fragment {
         Program program                                     = (Program) programRepo.findFirstReg();
         List<ClientTypeCategory> clientTypeCategories       = (List<ClientTypeCategory>) clientTypeCategoryRepo.findAll();
 
-        tv_fecha_inicio.setText(program.getDate_start());
-        tv_fecha_fin.setText(program.getDate_end());
+        tv_fecha_inicio.setText(program.getDate_start().substring(0,10));
+        tv_fecha_fin.setText(program.getDate_end().substring(0,10));
         tv_description.setText(program.getDescription());
         tv_title.setText(client.getClient_type().getFullname());
         tv_premio.setText(client.getClient_type().getAward());

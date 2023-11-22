@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 //                    Toast.makeText(activity, "Error interno database", Toast.LENGTH_SHORT).show();
 //                    e.printStackTrace();
 //                }
+
                 Log.d(LOG_TAG, "Obteniedo Todos los clientes para limpiar");
                 for (Client object : items) {
                     client = (Client) object;
