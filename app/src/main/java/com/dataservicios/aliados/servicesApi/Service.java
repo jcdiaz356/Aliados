@@ -15,6 +15,9 @@ import retrofit2.http.Part;
 
 public interface Service {
 
+    @POST("getClientForProgram")
+//    Call<JsonObject> getUserForCode(@Body String code);
+    Call<JsonObject> getClientForProgram(@Body Map<String, String> map);
     @POST("getClientForCodeAndPassword")
 //    Call<JsonObject> getUserForCode(@Body String code);
     Call<JsonObject> getClientForCodeAndPassword(@Body Map<String, String> map);
@@ -23,71 +26,8 @@ public interface Service {
 //    Call<JsonObject> getUserForCode(@Body String code);
     Call<JsonObject> getUserLoginForCode(@Body Map<String, String> map);
 
-
     @POST("changePassword")
 //    Call<JsonObject> getUserForCode(@Body String code);
     Call<JsonObject> changePassword(@Body Map<String, String> map);
-
-
-    // Obteniendo un promoción
-
-
-    // Obteniendo las promociones
-    @POST("getIndicatorsHome")
-    Call<JsonObject> getIndicatorsHome(@Body Map<String, String> map);
-
-
-    // Obteniendo los concursos
-    @POST("getConcoursesForSeller")
-    Call<JsonObject> getConcoursesForSeller(@Body Map<String, String> map);
-
-    @POST("getAllConcoursesForSeller")
-    Call<JsonObject> getAllConcoursesForSeller(@Body Map<String, String> map);
-    // Obteniendo las promociones
-
-    @POST("getEstadoCuenta")
-    Call<JsonObject> getEstadoCuenta(@Body Map<String, String> map);
-
-    @POST("getConcourseDetail")
-    Call<JsonObject> getConcourseDetail(@Body Map<String, String> map);
-    @POST("getAllConcourseDetail")
-    Call<JsonObject> getAllConcourseDetail(@Body Map<String, String> map);
-
-
-    /**
-     *
-     * @param map
-     * @return
-     */
-    @POST("sanctum/token")
-    Call<JsonObject> getLogin(@Body Map<String, String> map);
-
-//    @Multipart
-//    @POST("process")
-//    Call<JsonObject> saveProcess(@Body Map<String, String> map,@Part MultipartBody.Part image);
-
-    @Multipart
-    @POST("process")
-    Call<JsonObject> saveProcess(
-            @Part("turn_id")            RequestBody turn_id,
-            @Part("dock_id")            RequestBody dock_id,
-            @Part("user_id")            RequestBody user_id,
-            @Part("supervisor")         RequestBody supervisor,
-            @Part("date")               RequestBody date,
-            @Part("time")               RequestBody time,
-            @Part("cheker")             RequestBody cheker,
-            @Part("entri")              RequestBody entri,
-            @Part("date_star")          RequestBody date_star,
-            @Part("date_end")           RequestBody date_end,
-            @Part("observations")       RequestBody observations,
-            @Part("incidencess")        RequestBody incidencess,
-            @Part MultipartBody.Part    image_one,
-            @Part MultipartBody.Part    image_two
-    );
-
-
-
-
-
 
 }

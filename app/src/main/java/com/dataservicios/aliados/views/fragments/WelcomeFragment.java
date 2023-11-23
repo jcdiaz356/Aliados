@@ -1,33 +1,30 @@
 package com.dataservicios.aliados.views.fragments;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dataservicios.aliados.model.Award;
-import com.dataservicios.aliados.model.Program;
-import com.dataservicios.aliados.repo.AwardRepo;
-import com.dataservicios.aliados.repo.ProgramRepo;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
 import com.dataservicios.aliados.R;
 import com.dataservicios.aliados.db.DatabaseManager;
+import com.dataservicios.aliados.model.Award;
 import com.dataservicios.aliados.model.Client;
+import com.dataservicios.aliados.model.Program;
+import com.dataservicios.aliados.repo.AwardRepo;
+import com.dataservicios.aliados.repo.ClientProgramRepoImpl;
+import com.dataservicios.aliados.repo.ProgramRepo;
+import com.dataservicios.aliados.util.ShowProcessDialog;
+import com.dataservicios.aliados.views.ClientProgramView;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -39,7 +36,7 @@ import java.util.Locale;
 import java.util.Map;
 
 
-public class WelcomeFragment extends Fragment {
+public class WelcomeFragment extends Fragment implements ClientProgramView {
 
     private static final String LOG_TAG = WelcomeFragment.class.getSimpleName();
     private Activity activity;
@@ -50,16 +47,23 @@ public class WelcomeFragment extends Fragment {
     private Award award;
     private ProgramRepo programRepo;
     private AwardRepo awardRepo;
+    private ClientProgramRepoImpl clientProgramRepoImpl;
+    private ShowProcessDialog showProcessDialog;
     public WelcomeFragment(Client client) {
         // Required empty public constructor
         this.client = client;
-        this.activity = getActivity();
+     //   this.activity = getActivity();
+        clientProgramRepoImpl = new ClientProgramRepoImpl(this);
+
+
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_welcome, container, false);
 
         DatabaseManager.init(getContext());
+
+        showProcessDialog = new ShowProcessDialog(getContext());
 
         programRepo = new ProgramRepo(activity);
         awardRepo = new AwardRepo(activity);
@@ -79,10 +83,8 @@ public class WelcomeFragment extends Fragment {
         tv_llave = (TextView) rootView.findViewById(R.id.tv_llave);
         tv_user_name.setText(client.getFullname());
 
-
         ArrayList<Program> programs = (ArrayList<Program>) programRepo.findAll();
         showLoadPrograms(programs);
-        getDataWelcome();
 
         spn_program.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -92,17 +94,14 @@ public class WelcomeFragment extends Fragment {
                 String label = ((Program) spn_program.getSelectedItem()).getMonth() ;
                //
                 programRepo.findById(program_id);
-                Toast.makeText(getContext(), label + String.valueOf(program_id) , Toast.LENGTH_SHORT).show();
-
+                clientProgramRepoImpl.getClientProgram(client.getId(),program_id,activity);
+               // Toast.makeText(getContext(), label + String.valueOf(program_id) , Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
         });
-
-
-
         return rootView;
     }
 
@@ -114,12 +113,7 @@ public class WelcomeFragment extends Fragment {
 
     private void getDataWelcome(){
 
-
-
         Map<String, String> map = new HashMap<String, String>();
-        /*map.put("id", user.getId_data());*/
-//        map.put("month", month.getMonth_number());
-//        map.put("year", String.valueOf(month.getYear_number()));
 
         DatabaseManager.init(activity);
         awardRepo = new AwardRepo(activity);
@@ -179,4 +173,33 @@ public class WelcomeFragment extends Fragment {
     }
 
 
+    @Override
+    public void getDataSuccess(boolean success) {
+
+        if(success) {
+            getDataWelcome();
+        }
+    }
+
+    @Override
+    public void getDataError(String message) {
+
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void serverError(Throwable error) {
+
+        Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showProgressBar() {
+        showProcessDialog.showDialog();
+    }
+
+    @Override
+    public void hideProgresbar() {
+        showProcessDialog.hideDialog();
+    }
 }

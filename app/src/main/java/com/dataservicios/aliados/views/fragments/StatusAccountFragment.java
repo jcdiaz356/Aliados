@@ -1,20 +1,14 @@
 package com.dataservicios.aliados.views.fragments;
 
-import android.app.Dialog;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TextView;
@@ -23,30 +17,23 @@ import android.widget.Toast;
 import com.dataservicios.aliados.model.AwardDetail;
 import com.dataservicios.aliados.model.Program;
 import com.dataservicios.aliados.repo.AwardDetailRepo;
+import com.dataservicios.aliados.repo.ClientProgramRepo;
+import com.dataservicios.aliados.repo.ClientProgramRepoImpl;
 import com.dataservicios.aliados.repo.ProgramRepo;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.dataservicios.aliados.util.ShowProcessDialog;
+import com.dataservicios.aliados.views.ClientProgramView;
 import com.dataservicios.aliados.R;
 import com.dataservicios.aliados.db.DatabaseHelper;
 import com.dataservicios.aliados.db.DatabaseManager;
 import com.dataservicios.aliados.model.Client;
-import com.dataservicios.aliados.servicesApi.RestApiAdapter;
-import com.dataservicios.aliados.servicesApi.Service;
 
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
-public class StatusAccountFragment extends Fragment {
+public class StatusAccountFragment extends Fragment implements ClientProgramView {
     private static final String LOG_TAG = StatusAccountFragment.class.getSimpleName();
 
     private Spinner spn_month;
@@ -56,12 +43,15 @@ public class StatusAccountFragment extends Fragment {
     private AwardDetailRepo awardDetailRepo;
     private ProgramRepo programRepo;
     private DecimalFormat formatea = new DecimalFormat("###,###");
+    private ShowProcessDialog showProcessDialog;
 
   //  private Month month;
-    private Client user;
+    private Client client;
+    private ClientProgramRepo clientProgramRepo;
 
     public StatusAccountFragment(Client user) {
-        this.user = user;
+        this.client = user;
+        clientProgramRepo = new ClientProgramRepoImpl(this);
     }
 
 
@@ -70,8 +60,8 @@ public class StatusAccountFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_status__account, container, false);
 
-        DatabaseManager.init(getContext());
-        helper = DatabaseManager.getInstance().getHelper();
+
+        showProcessDialog = new ShowProcessDialog(getContext());
 
         awardDetailRepo = new AwardDetailRepo(getContext());
 
@@ -79,11 +69,6 @@ public class StatusAccountFragment extends Fragment {
         tv_soles_ganados    = (TextView) rootView.findViewById(R.id.tv_soles_ganados);
         tbl_concurse = (TableLayout) rootView.findViewById(R.id.tbl_concurse);
         programRepo = new ProgramRepo(getContext());
-
-
-        this.getDataAwardDetails();
-
-
 
         ArrayList<Program> programs = (ArrayList<Program>) programRepo.findAll();
         showLoadPrograms(programs);
@@ -95,7 +80,9 @@ public class StatusAccountFragment extends Fragment {
                 String label = ((Program) spn_month.getSelectedItem()).getMonth() ;
                 //
                 programRepo.findById(program_id);
-                Toast.makeText(getContext(), label + String.valueOf(program_id) , Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getContext(), label + String.valueOf(program_id) , Toast.LENGTH_SHORT).show();
+                clientProgramRepo.getClientProgram(client.getId(),program_id,getActivity());
+
 
             }
             @Override
@@ -144,5 +131,33 @@ public class StatusAccountFragment extends Fragment {
     }
 
 
+    @Override
+    public void getDataSuccess(boolean success) {
 
+        if(success) {
+            getDataAwardDetails();
+        }
+    }
+
+    @Override
+    public void getDataError(String message) {
+
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void serverError(Throwable error) {
+
+        Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showProgressBar() {
+        showProcessDialog.showDialog();
+    }
+
+    @Override
+    public void hideProgresbar() {
+        showProcessDialog.hideDialog();
+    }
 }
