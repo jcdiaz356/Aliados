@@ -3,15 +3,15 @@ plugins {
 }
 
 android {
-    namespace 'com.dataservicios.aliados'
+    namespace 'com.devsystem.aliados'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.dataservicios.aliados"
+        applicationId "com.devsystem.aliados"
         minSdk 26
         targetSdk 33
-        versionCode 3
-        versionName "1.0.7"
+        versionCode 4
+        versionName "1.0.8"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
