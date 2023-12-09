@@ -15,9 +15,9 @@
             android:textAlignment="textStart"
             android:paddingLeft="5pt"
             android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/black"
             android:textSize="16dp"
             android:text="TextView" />
-
         <TextView
             android:id="@+id/textView1"
             android:layout_width="0dp"
@@ -25,6 +25,7 @@
             android:textAlignment="center"
             android:layout_weight="1"
             android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/black"
             android:textSize="16dp"
             android:text="TextView" />
 

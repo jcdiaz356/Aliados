@@ -46,6 +46,12 @@ public class AwardDetail {
     private int point_real_total;
 
     @DatabaseField
+    private int point_acumulated;
+
+    @DatabaseField
+    private String date_acumulated;
+
+    @DatabaseField
     private String fecha;
 
     @DatabaseField(foreign = true, foreignAutoRefresh = true)
@@ -177,5 +183,21 @@ public class AwardDetail {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public int getPoint_acumulated() {
+        return point_acumulated;
+    }
+
+    public void setPoint_acumulated(int point_acumulated) {
+        this.point_acumulated = point_acumulated;
+    }
+
+    public String getDate_acumulated() {
+        return date_acumulated;
+    }
+
+    public void setDate_acumulated(String date_acumulated) {
+        this.date_acumulated = date_acumulated;
     }
 }

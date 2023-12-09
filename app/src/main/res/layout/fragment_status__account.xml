@@ -128,12 +128,13 @@
 
                 >
                 <TextView
+                    android:id="@+id/tv_punto_acumulado"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Puntos acumulados al 05/10s: /.32,210"
+                    android:text="------"
                     android:fontFamily="@font/montserrat_bold"
                     android:textColor="@color/white"
-                    android:textSize="16dp"
+                    android:textSize="12dp"
                     android:textAlignment="center"
                     />
 

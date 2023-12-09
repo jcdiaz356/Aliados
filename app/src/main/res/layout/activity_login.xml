@@ -48,6 +48,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
+                        android:textColorHint="@color/plomo_500"
                         android:textStyle="bold"
                         android:textSize="18dp"
                         app:boxBackgroundMode="none"
@@ -58,13 +59,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-
+                            android:textColorHint="@color/plomo_500"
                             android:hint="@string/text_username"
                             android:inputType="text"
                             android:padding="12dp"
                             android:singleLine="false"
                             android:textStyle="bold"
                             android:textSize="18dp"
+                            android:textColor="@color/black"
                             android:text=""
                             android:textAlignment="center" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -86,6 +88,7 @@
                         android:textAlignment="center"
                         android:textStyle="bold"
                         android:textSize="18dp"
+                        android:textColorHint="@color/plomo_500"
                         app:boxBackgroundMode="none"
                         app:hintTextAppearance="@style/TextAppearance.AppCompat">
 
@@ -94,12 +97,14 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
+                            android:textColorHint="@color/plomo_500"
                             android:hint="@string/text_password"
                             android:inputType="textPassword"
                             android:padding="12dp"
                             android:singleLine="false"
                             android:textStyle="bold"
                             android:textSize="18dp"
+                            android:textColor="@color/black"
                             android:text=""
                             android:textAlignment="center" />
                     </com.google.android.material.textfield.TextInputLayout>

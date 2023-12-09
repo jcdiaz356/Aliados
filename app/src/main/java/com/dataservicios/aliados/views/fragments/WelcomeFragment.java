@@ -168,7 +168,7 @@ public class WelcomeFragment extends Fragment implements ClientProgramView {
         if(value_key_personal >=70 && value_key_personal < 80)  iv_porc_gestion.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.crono_8xxxhdpi));
         if(value_key_personal >=80 && value_key_personal < 90)  iv_porc_gestion.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.crono_9xxxhdpi));
         if(value_key_personal >=90 && value_key_personal < 100)  iv_porc_gestion.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.crono_9xxxhdpi));
-        if( value_key_personal == 100)  iv_porc_gestion.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.crono_10xxxhdpi));
+        if( value_key_personal >= 100)  iv_porc_gestion.setImageDrawable(ContextCompat.getDrawable(getContext(),R.drawable.crono_10xxxhdpi));
 
     }
 

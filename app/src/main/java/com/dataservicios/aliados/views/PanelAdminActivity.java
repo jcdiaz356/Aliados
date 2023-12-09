@@ -11,10 +11,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.dataservicios.aliados.R;
 import com.dataservicios.aliados.repo.ClientRepo;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
 
 import com.dataservicios.aliados.db.DatabaseManager;
@@ -22,6 +25,7 @@ import com.dataservicios.aliados.views.fragments.ConcourseFragment;
 import com.dataservicios.aliados.views.fragments.StatusAccountFragment;
 import com.dataservicios.aliados.views.fragments.WelcomeFragment;
 import com.dataservicios.aliados.model.Client;
+import com.google.android.material.snackbar.Snackbar;
 
 public class PanelAdminActivity extends AppCompatActivity {
     private static final String LOG_TAG = PanelAdminActivity.class.getSimpleName();
@@ -95,7 +99,14 @@ public class PanelAdminActivity extends AppCompatActivity {
 
 
 
-
+        FloatingActionButton fab = findViewById(R.id.fab_home);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               // Snackbar.make(view, "Soporte WhatsApp", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                Toast.makeText(activity,"Soporte WhatsApp",Toast.LENGTH_LONG).show();
+            }
+        });
 
 
 

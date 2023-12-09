@@ -29,7 +29,10 @@ import com.dataservicios.aliados.model.Client;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Locale;
 
 
@@ -37,7 +40,7 @@ public class StatusAccountFragment extends Fragment implements ClientProgramView
     private static final String LOG_TAG = StatusAccountFragment.class.getSimpleName();
 
     private Spinner spn_month;
-    private TextView tv_soles_ganados;
+    private TextView tv_soles_ganados,tv_punto_acumulado;
     private TableLayout tbl_concurse;
     private DatabaseHelper helper;
     private AwardDetailRepo awardDetailRepo;
@@ -67,8 +70,11 @@ public class StatusAccountFragment extends Fragment implements ClientProgramView
 
         spn_month           = (Spinner) rootView.findViewById(R.id.spn_month);
         tv_soles_ganados    = (TextView) rootView.findViewById(R.id.tv_soles_ganados);
+        tv_punto_acumulado  = (TextView) rootView.findViewById(R.id.tv_punto_acumulado);
         tbl_concurse = (TableLayout) rootView.findViewById(R.id.tbl_concurse);
         programRepo = new ProgramRepo(getContext());
+
+
 
         ArrayList<Program> programs = (ArrayList<Program>) programRepo.findAll();
         showLoadPrograms(programs);
@@ -109,8 +115,23 @@ public class StatusAccountFragment extends Fragment implements ClientProgramView
             // Aplica el formato al número
             String MontoSoles = String.valueOf(formatea.format(awardDetail.getPoint_real()));
 
-            String ganados = numberFormat.format(awardDetail.getReal_total());
+
+            SimpleDateFormat formatoOriginal = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            Date miFecha = null;
+            String fechaFormateada;
+            try {
+                miFecha = formatoOriginal.parse(awardDetail.getDate_acumulated());
+                // Crea un objeto SimpleDateFormat para el formato deseado
+                SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                // Aplica el formato a la fecha
+                fechaFormateada = formatoFecha.format(miFecha);
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+
             tv_soles_ganados.setText(String.valueOf(formatea.format(awardDetail.getPoint_real_total())));
+            //tv_punto_acumulado.setText("Puntos acumulados al " +  String.valueOf(awardDetail.getDate_acumulated()).substring(0,10) + " S/. " + awardDetail.getPoint_acumulated());
+            tv_punto_acumulado.setText("Puntos acumulados al " +  fechaFormateada + " S/. " + formatea.format(awardDetail.getPoint_acumulated()));
 
             /*String MontoSoles = String.valueOf(awardDetail.getRealv());*/
 

@@ -115,31 +115,29 @@ public class ClientProgramRepoImpl implements ClientProgramRepo {
                             }
                             ArrayList<CategoryAwardDetail> categoryAwardDetails1  = (ArrayList<CategoryAwardDetail>) categoryAwardDetailRepo.findAll();
 
-
-
                             clientProgramView.hideProgresbar();
                             clientProgramView.getDataSuccess(true);
-
 
                         } else {
                             clientProgramView.hideProgresbar();
                             clientProgramView.getDataError("No se pudo obtener los datos");
                             clientProgramView.getDataSuccess(false);
-
                         }
                     }else {
-                        try {
-                            Log.d(LOG_TAG,"Error credenciales: " + response.errorBody().string());
-                            clientProgramView.hideProgresbar();
-                            clientProgramView.getDataError("No se pudo obtener los datos");
-                            clientProgramView.getDataSuccess(false);
 
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            clientProgramView.hideProgresbar();
-                            clientProgramView.serverError(e);
-                            clientProgramView.getDataSuccess(false);
-                        }
+                        clientProgramView.hideProgresbar();
+                        clientProgramView.getDataError("No se pudo obtener los datos");
+                        clientProgramView.getDataSuccess(false);
+//                        try {
+//                            Log.d(LOG_TAG,"Error credenciales: " + response.errorBody().string());
+//
+//
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                            clientProgramView.hideProgresbar();
+//                            clientProgramView.serverError(e);
+//                            clientProgramView.getDataSuccess(false);
+//                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

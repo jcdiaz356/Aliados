@@ -30,7 +30,9 @@
                 android:fontFamily="@font/montserrat_black"
                 android:textColor="@color/white"
                 android:textSize="25dp"
-                android:paddingBottom="10dp"
+                android:textAlignment="center"
+                android:paddingBottom="20dp"
+                android:paddingTop="20dp"
                 />
 
             <View
@@ -47,6 +49,8 @@
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:textAlignment="center"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
                 />
             <View
                 android:layout_width="match_parent"
@@ -106,8 +110,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="top|center"
                 android:orientation="horizontal"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
                 android:paddingLeft="40dp"
                 android:paddingRight="40dp"
                 >
@@ -123,7 +127,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:gravity="bottom|center"
                 android:orientation="horizontal"
                 >
@@ -163,6 +168,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="top|center"
                 android:orientation="horizontal"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 >
                 <TextView
                     android:id="@+id/tv_porc_gestion"
@@ -181,7 +188,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top|center"
-                android:paddingTop="10dp"
+                android:paddingTop="20dp"
                 android:orientation="horizontal">
 
                 <TableRow
@@ -213,7 +220,7 @@
                             android:text="0 %"
                             android:fontFamily="@font/montserrat_bold"
                             android:textColor="@color/black"
-                            android:textSize="24dp"
+                            android:textSize="20dp"
                             android:textAlignment="center"
                             />
                     </LinearLayout>
@@ -243,7 +250,7 @@
                             android:text="0 %"
                             android:fontFamily="@font/montserrat_bold"
                             android:textColor="@color/black"
-                            android:textSize="24dp"
+                            android:textSize="20dp"
                             android:textAlignment="center"
                             />
                     </LinearLayout>
@@ -254,7 +261,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top|center"
-                android:paddingTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:orientation="horizontal">
 
                 <TableRow
@@ -286,7 +294,7 @@
                             android:text="0 %"
                             android:fontFamily="@font/montserrat_bold"
                             android:textColor="@color/black"
-                            android:textSize="24dp"
+                            android:textSize="20dp"
                             android:textAlignment="center"
                             />
                     </LinearLayout>
@@ -300,6 +308,8 @@
                 android:gravity="top|center"
                 android:orientation="horizontal"
                 android:padding="2dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:layout_margin="4dp"
                 >
                 <TextView
@@ -328,6 +338,8 @@
                 android:gravity="top|center"
                 android:orientation="horizontal"
                 android:background="@color/blue_200"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:padding="2dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"

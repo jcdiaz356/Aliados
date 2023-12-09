@@ -113,7 +113,8 @@
                             android:textAlignment="textStart"
                             android:paddingLeft="5dp"
                             android:fontFamily="@font/montserrat_bold"
-                            android:textSize="16dp"
+                            android:textColor="@color/black"
+                            android:textSize="14dp"
                             android:text="FECHA DE INICIO:" />
 
                         <TextView
@@ -123,6 +124,7 @@
                             android:textAlignment="center"
                             android:layout_weight="1"
                             android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/black"
                             android:textSize="16dp"
                             android:text="1/12/2022" />
 
@@ -140,10 +142,11 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-
+                            android:textColor="@color/black"
                             android:fontFamily="@font/montserrat_bold"
                             android:textAlignment="textStart"
                             android:paddingLeft="5dp"
+                            android:textSize="14dp"
                             android:text="FECHA FIN:" />
 
                         <TextView
@@ -152,6 +155,7 @@
                             android:layout_height="wrap_content"
                             android:textAlignment="center"
                             android:layout_weight="1"
+                            android:textColor="@color/black"
                             android:fontFamily="@font/montserrat_bold"
                             android:textSize="16dp"
                             android:text="31/12/2022" />
@@ -205,6 +209,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:textAlignment="center"
+                            android:textColor="@color/black"
                             android:fontFamily="@font/montserrat_bold"
                             android:textSize="16dp"
                             android:text="" />
@@ -300,6 +305,7 @@
                             android:textAlignment="center"
                             android:fontFamily="@font/montserrat_bold"
                             android:textSize="14dp"
+                            android:textColor="@color/black"
                             android:text="" />
                     </TableRow>
 
